@@ -7,8 +7,9 @@
     <string name="hello_ryan">Hi Ryan!</string>
     <string name="hello_alex">Hi Alex!</string>
     <string name="lesson1">Lesson 1</string>
-    <string name ="desc">N/A</string>
-    <string name = "asd">asd</string>
+    <string name="desc">N/A</string>
+    <string name="asd">asd</string>
     <string name="TestingMerge">Test</string>
+    <string name="title_activity_foil">FoilActivity</string>
 
 </resources>
