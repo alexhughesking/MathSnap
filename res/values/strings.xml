@@ -11,5 +11,6 @@
     <string name="asd">asd</string>
     <string name="TestingMerge">Test</string>
     <string name="title_activity_foil">FoilActivity</string>
+    <string name="checkAnswer">Check answer</string>
 
 </resources>
