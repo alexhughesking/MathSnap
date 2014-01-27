@@ -31,18 +31,18 @@ public final class R {
         public static final int action_settings=0x7f08000e;
         public static final int arrowLayout=0x7f08000a;
         public static final int checkAnswerButton=0x7f08000b;
-        public static final int editText1=0x7f080003;
-        public static final int editText2=0x7f080005;
-        public static final int editText3=0x7f080007;
-        public static final int editText4=0x7f080009;
-        public static final int focusStealer=0x7f080002;
         public static final int foilCorrect=0x7f08000c;
+        public static final int foilEditText1=0x7f080003;
+        public static final int foilEditText2=0x7f080005;
+        public static final int foilEditText3=0x7f080007;
+        public static final int foilEditText4=0x7f080009;
+        public static final int foilFocusStealer=0x7f080002;
         public static final int foilProblem=0x7f080000;
+        public static final int foilTextView1=0x7f080004;
+        public static final int foilTextView2=0x7f080006;
+        public static final int foilTextView3=0x7f080008;
         public static final int imageButton1=0x7f08000d;
         public static final int linearLayout1=0x7f080001;
-        public static final int textView1=0x7f080004;
-        public static final int textView2=0x7f080006;
-        public static final int textView3=0x7f080008;
     }
     public static final class layout {
         public static final int activity_foil=0x7f030000;
@@ -64,6 +64,7 @@ public final class R {
         public static final int hello_world=0x7f050002;
         public static final int lesson1=0x7f050005;
         public static final int title_activity_foil=0x7f050009;
+        public static final int xSquared=0x7f05000b;
     }
     public static final class style {
         /** 

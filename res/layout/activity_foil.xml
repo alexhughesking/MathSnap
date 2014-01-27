@@ -17,7 +17,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="Foil Problem"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:textColor="#000" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -27,7 +28,7 @@
         android:layout_centerVertical="true" >
 
         <LinearLayout
-            android:id="@+id/focusStealer"
+            android:id="@+id/foilFocusStealer"
             android:layout_width="0px"
             android:layout_height="0px"
             android:focusable="true"
@@ -35,66 +36,72 @@
             android:orientation="horizontal" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/foilEditText1"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="phone" >
+            android:inputType="numberSigned"
+            android:imeOptions="actionNext" >
         </EditText>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/foilTextView1"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
             android:text="x^2 + "
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:textColor="#000" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/foilEditText2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="phone" >
+            android:inputType="numberSigned"
+            android:imeOptions="actionNext" >
         </EditText>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/foilTextView2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
             android:text="x + "
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:textColor="#000" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/foilEditText3"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="phone" >
+            android:inputType="numberSigned"
+            android:imeOptions="actionNext" >
         </EditText>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/foilTextView3"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
             android:text="x + "
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:textColor="#000" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/foilEditText4"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="phone" >
+            android:inputType="numberSigned" >
         </EditText>
     </LinearLayout>
 
@@ -124,6 +131,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text=""
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:textColor="#000" />
 
 </RelativeLayout>
