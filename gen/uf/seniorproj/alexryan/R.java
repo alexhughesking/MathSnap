@@ -21,15 +21,14 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int background=0x7f020000;
-        public static final int button_image=0x7f020001;
-        public static final int buttonbasic=0x7f020002;
-        public static final int buttonbasicpressed=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
+        public static final int ic_launcher=0x7f020000;
+        public static final int progress=0x7f020001;
+        public static final int x=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000e;
+        public static final int action_settings=0x7f080011;
         public static final int arrowLayout=0x7f08000a;
+        public static final int button1=0x7f08000f;
         public static final int checkAnswerButton=0x7f08000b;
         public static final int editText1=0x7f080003;
         public static final int editText2=0x7f080005;
@@ -38,8 +37,10 @@ public final class R {
         public static final int focusStealer=0x7f080002;
         public static final int foilCorrect=0x7f08000c;
         public static final int foilProblem=0x7f080000;
-        public static final int imageButton1=0x7f08000d;
+        public static final int imageView1=0x7f08000e;
+        public static final int imageView2=0x7f080010;
         public static final int linearLayout1=0x7f080001;
+        public static final int tableRow1=0x7f08000d;
         public static final int textView1=0x7f080004;
         public static final int textView2=0x7f080006;
         public static final int textView3=0x7f080008;
