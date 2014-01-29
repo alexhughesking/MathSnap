@@ -21,14 +21,53 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int progress=0x7f020001;
-        public static final int x=0x7f020002;
+        public static final int ab_background_textured_mytheme=0x7f020000;
+        public static final int ab_bottom_solid_mytheme=0x7f020001;
+        public static final int ab_solid_mytheme=0x7f020002;
+        public static final int ab_stacked_solid_mytheme=0x7f020003;
+        public static final int ab_texture_tile_mytheme=0x7f020004;
+        public static final int ab_transparent_mytheme=0x7f020005;
+        public static final int bg=0x7f020006;
+        public static final int btn_cab_done_default_mytheme=0x7f020007;
+        public static final int btn_cab_done_focused_mytheme=0x7f020008;
+        public static final int btn_cab_done_mytheme=0x7f020009;
+        public static final int btn_cab_done_pressed_mytheme=0x7f02000a;
+        public static final int cab_background_bottom_mytheme=0x7f02000b;
+        public static final int cab_background_top_mytheme=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int icon=0x7f02000e;
+        public static final int list_focused_mytheme=0x7f02000f;
+        public static final int list_pressed_mytheme=0x7f020010;
+        public static final int menu_dropdown_panel_mytheme=0x7f020011;
+        public static final int progress=0x7f020012;
+        public static final int progress_bg_mytheme=0x7f020013;
+        public static final int progress_horizontal_mytheme=0x7f020014;
+        public static final int progress_primary_mytheme=0x7f020015;
+        public static final int progress_secondary_mytheme=0x7f020016;
+        public static final int selectable_background_mytheme=0x7f020017;
+        public static final int spinner_ab_default_mytheme=0x7f020018;
+        public static final int spinner_ab_disabled_mytheme=0x7f020019;
+        public static final int spinner_ab_focused_mytheme=0x7f02001a;
+        public static final int spinner_ab_pressed_mytheme=0x7f02001b;
+        public static final int spinner_background_ab_mytheme=0x7f02001c;
+        public static final int tab_indicator_ab_mytheme=0x7f02001d;
+        public static final int tab_selected_focused_mytheme=0x7f02001e;
+        public static final int tab_selected_mytheme=0x7f02001f;
+        public static final int tab_selected_pressed_mytheme=0x7f020020;
+        public static final int tab_unselected_focused_mytheme=0x7f020021;
+        public static final int tab_unselected_mytheme=0x7f020022;
+        public static final int tab_unselected_pressed_mytheme=0x7f020023;
+        public static final int test=0x7f020024;
+        public static final int test2=0x7f020025;
+        public static final int test3=0x7f020026;
+        public static final int test4=0x7f020027;
+        public static final int x=0x7f020028;
     }
     public static final class id {
         public static final int action_settings=0x7f080011;
         public static final int arrowLayout=0x7f08000a;
-        public static final int button1=0x7f08000f;
+        public static final int button1=0x7f08000e;
+        public static final int button2=0x7f080010;
         public static final int checkAnswerButton=0x7f08000b;
         public static final int editText1=0x7f080003;
         public static final int editText2=0x7f080005;
@@ -37,10 +76,9 @@ public final class R {
         public static final int focusStealer=0x7f080002;
         public static final int foilCorrect=0x7f08000c;
         public static final int foilProblem=0x7f080000;
-        public static final int imageView1=0x7f08000e;
-        public static final int imageView2=0x7f080010;
         public static final int linearLayout1=0x7f080001;
         public static final int tableRow1=0x7f08000d;
+        public static final int tableRow2=0x7f08000f;
         public static final int textView1=0x7f080004;
         public static final int textView2=0x7f080006;
         public static final int textView3=0x7f080008;
@@ -67,16 +105,11 @@ public final class R {
         public static final int title_activity_foil=0x7f050009;
     }
     public static final class style {
+        public static final int ActionBar_Solid_Mytheme=0x7f060002;
+        public static final int ActionBar_Transparent_Mytheme=0x7f060003;
+        public static final int ActionBarTabStyle_Mytheme=0x7f060006;
+        public static final int ActionButton_CloseMode_Mytheme=0x7f060009;
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
@@ -89,9 +122,13 @@ public final class R {
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f060000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
+        public static final int DropDownListView_Mytheme=0x7f060005;
+        public static final int DropDownNav_Mytheme=0x7f060007;
+        public static final int PopupMenu_Mytheme=0x7f060004;
+        public static final int ProgressBar_Mytheme=0x7f060008;
+        public static final int Theme_Mytheme=0x7f060001;
+        /**  this style is only referenced in a Light.DarkActionBar based theme 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int Theme_Mytheme_Widget=0x7f06000a;
     }
 }
