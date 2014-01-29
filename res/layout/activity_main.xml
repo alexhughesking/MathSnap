@@ -12,14 +12,15 @@
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="0dip" >"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip" >"
             
             <ImageView
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/x" 
-                android:padding="0dip"/>
+                />
 
             <TextView
                 android:id="@+id/textView1"
@@ -43,7 +44,7 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="0dip" >
+            android:layout_marginBottom="10dip" >
             
             <ImageView
                 android:id="@+id/imageView3"
@@ -74,7 +75,7 @@
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="0dip" >
+            android:layout_marginBottom="10dip" >
             
             <ImageView
                 android:id="@+id/imageView5"
@@ -89,7 +90,9 @@
                 android:layout_height="fill_parent"
                 android:text="Solve for X" 
                 android:gravity="center"
-                android:background="#C44D58"/>
+                android:background="#C44D58"
+                android:clickable="true"
+                android:onClick="startSolveForX"/>
 
             <ImageView
                 android:id="@+id/imageView6"
