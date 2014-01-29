@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name="uf.seniorproj.alexryan.FoilActivity"
-            android:label="@string/title_activity_foil" >
+            android:label="@string/title_activity_foil"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
 
     </application>
