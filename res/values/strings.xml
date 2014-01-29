@@ -12,10 +12,7 @@
     <string name="TestingMerge">Test</string>
     <string name="title_activity_foil">FoilActivity</string>
     <string name="checkAnswer">Check answer</string>
-<<<<<<< HEAD
-=======
     <string name="title_activity_word_prob">WordProbActivity</string>    
->>>>>>> a1e4e6f7f70ed9d3431044f2eb25e20a6a932a67
     <string name="xSquared">x&lt;sup&gt;2&lt;/sup&gt; + </string>
     <string name="title_activity_solve_for_x">SolveForX</string>
 
