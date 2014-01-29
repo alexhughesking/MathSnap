@@ -12,5 +12,6 @@
     <string name="TestingMerge">Test</string>
     <string name="title_activity_foil">FoilActivity</string>
     <string name="checkAnswer">Check answer</string>
-
+    <string name="title_activity_word_prob">WordProbActivity</string>
+    
 </resources>

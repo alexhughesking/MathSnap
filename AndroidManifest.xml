@@ -27,6 +27,10 @@
             android:name="uf.seniorproj.alexryan.FoilActivity"
             android:label="@string/title_activity_foil" >
         </activity>
+        <activity
+            android:name="uf.seniorproj.alexryan.WordProbActivity"
+            android:label="@string/title_activity_word_prob" >
+        </activity>
     </application>
 
 </manifest>
