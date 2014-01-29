@@ -27,4 +27,9 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    public void startSolveForX(View v) {
+    	Intent intent = new Intent(this, SolveForX.class);
+    	startActivity(intent);
+    }
+    
 }

@@ -28,6 +28,10 @@
             android:label="@string/title_activity_foil"
             android:windowSoftInputMode="adjustResize" >
         </activity>
+        <activity
+            android:name="uf.seniorproj.alexryan.SolveForX"
+            android:label="@string/title_activity_solve_for_x" >
+        </activity>
     </application>
 
 </manifest>
