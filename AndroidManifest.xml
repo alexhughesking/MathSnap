@@ -5,18 +5,17 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:icon="@drawable/icon"
+        android:theme="@style/Theme.Mytheme"
+        android:label="@string/app_name">
         <activity
             android:name="uf.seniorproj.alexryan.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,12 +24,15 @@
         </activity>
         <activity
             android:name="uf.seniorproj.alexryan.FoilActivity"
-            android:label="@string/title_activity_foil" >
+            android:label="@string/title_activity_foil"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
+        
         <activity
             android:name="uf.seniorproj.alexryan.WordProbActivity"
             android:label="@string/title_activity_word_prob" >
         </activity>
+
     </application>
 
 </manifest>
