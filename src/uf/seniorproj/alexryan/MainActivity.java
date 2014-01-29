@@ -27,8 +27,16 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+
     public void startWordProbActivity(View v) {
     	Intent intent = new Intent(this, WordProbActivity.class);
     	startActivity(intent);
     }
+
+    public void startSolveForX(View v) {
+    	Intent intent = new Intent(this, SolveForX.class);
+    	startActivity(intent);
+    }
+    
+
 }

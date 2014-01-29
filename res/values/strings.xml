@@ -14,5 +14,6 @@
     <string name="checkAnswer">Check answer</string>
     <string name="title_activity_word_prob">WordProbActivity</string>    
     <string name="xSquared">x&lt;sup&gt;2&lt;/sup&gt; + </string>
+    <string name="title_activity_solve_for_x">SolveForX</string>
 
 </resources>
