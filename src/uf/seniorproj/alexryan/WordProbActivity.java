@@ -1,9 +1,7 @@
 package uf.seniorproj.alexryan;
 
 import android.app.Activity;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -37,16 +35,16 @@ public class WordProbActivity extends Activity {
 		TextView problem = (TextView)findViewById(R.id.wordProblem);
 		problem.setText(question[0]);
 		
-		TextView aRow = (TextView)findViewById(R.id.aRow);
+		TextView aRow = (TextView)findViewById(R.id.a);
 		aRow.setText(a[0]);
 		
-		TextView bRow = (TextView)findViewById(R.id.bRow);
+		TextView bRow = (TextView)findViewById(R.id.b);
 		bRow.setText(b[0]);
 	
-		TextView cRow = (TextView)findViewById(R.id.cRow);
+		TextView cRow = (TextView)findViewById(R.id.c);
 		cRow.setText(c[0]);
 		
-		TextView dRow = (TextView)findViewById(R.id.dRow);
+		TextView dRow = (TextView)findViewById(R.id.d);
 		dRow.setText(d[0]);
 	}
 

@@ -27,4 +27,8 @@ public class MainActivity extends Activity {
     	startActivity(intent);
     }
     
+    public void startWordProbActivity(View v) {
+    	Intent intent = new Intent(this, WordProbActivity.class);
+    	startActivity(intent);
+    }
 }
