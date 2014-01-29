@@ -27,19 +27,19 @@
             android:label="@string/title_activity_foil"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-<<<<<<< HEAD
+
         <activity
             android:name="uf.seniorproj.alexryan.SolveForX"
             android:label="@string/title_activity_solve_for_x" >
         </activity>
-=======
+
         
         <activity
             android:name="uf.seniorproj.alexryan.WordProbActivity"
             android:label="@string/title_activity_word_prob" >
         </activity>
 
->>>>>>> a1e4e6f7f70ed9d3431044f2eb25e20a6a932a67
+
     </application>
 
 </manifest>
