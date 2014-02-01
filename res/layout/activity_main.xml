@@ -6,20 +6,37 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="0">
+        android:stretchColumns="1">
 	
         <TableRow 
             android:id="@+id/tableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dip" >
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="fill_parent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip" >"
+            
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
-                android:background="#4ECDC4" />
+                android:src="@drawable/x" 
+                />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="F.O.I.L." 
+                android:gravity="center"
+                android:background="#FF6B6B"
+                android:clickable="true"
+                android:onClick="startFoilActivity" />"
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/x" />
  
         </TableRow>
         
@@ -27,17 +44,63 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dip" >
-
-            <Button
-                android:id="@+id/button2"
+            android:layout_marginBottom="10dip" >
+            
+            <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" 
-                android:background="#4ECDC4"/>
+                android:src="@drawable/x" 
+                android:padding="0dip"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Word Problems" 
+                android:gravity="center"
+                android:background="#C7F464"
+                android:clickable="true"
+                android:onClick="startWordProbActivity"/>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/x" />
             
 		</TableRow>
-        
+		
+        <TableRow 
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip" >
+            
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/x" 
+                android:padding="0dip"/>
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Solve for X" 
+                android:gravity="center"
+                android:background="#C44D58"
+                android:clickable="true"
+                android:onClick="startSolveForX"/>
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/x" />
+            
+		</TableRow>
     </TableLayout>
 </ScrollView>
+

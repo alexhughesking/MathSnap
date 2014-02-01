@@ -28,6 +28,18 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
 
+        <activity
+            android:name="uf.seniorproj.alexryan.SolveForX"
+            android:label="@string/title_activity_solve_for_x" >
+        </activity>
+
+        
+        <activity
+            android:name="uf.seniorproj.alexryan.WordProbActivity"
+            android:label="@string/title_activity_word_prob" >
+        </activity>
+
+
     </application>
 
 </manifest>
