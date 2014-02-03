@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:text="Foil Problem"
-        android:textSize="20dp"
+        android:textSize="40sp"
         android:textColor="#000" />
 
     <LinearLayout
@@ -39,10 +39,10 @@
         <EditText
             android:id="@+id/foilEditText1"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:imeOptions="flagNoExtractUi"
+            android:imeOptions="actionNext"
             android:inputType="numberSigned" >
 
         </EditText>
@@ -54,17 +54,17 @@
             android:layout_weight="2"
             android:gravity="left"
             android:text="x^2 + "
-            android:textSize="20dp"
+            android:textSize="36sp"
             android:textColor="#000" />
 
         <EditText
             android:id="@+id/foilEditText2"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:imeOptions="flagNoExtractUi"
-            android:inputType="numberSigned" >
+            android:inputType="numberSigned"
+            android:imeOptions="actionNext" >
         </EditText>
 
         <TextView
@@ -74,17 +74,17 @@
             android:layout_weight="2"
             android:gravity="left"
             android:text="x + "
-            android:textSize="20dp"
+            android:textSize="36sp"
             android:textColor="#000" />
 
         <EditText
             android:id="@+id/foilEditText3"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:imeOptions="flagNoExtractUi"
-            android:inputType="numberSigned" >
+            android:inputType="numberSigned"
+            android:imeOptions="actionNext" >
         </EditText>
 
         <TextView
@@ -94,16 +94,15 @@
             android:layout_weight="2"
             android:gravity="left"
             android:text="x + "
-            android:textSize="20dp"
+            android:textSize="36sp"
             android:textColor="#000" />
 
         <EditText
             android:id="@+id/foilEditText4"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:imeOptions="flagNoExtractUi"
             android:inputType="numberSigned" >
         </EditText>
     </LinearLayout>
@@ -122,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:text="@string/checkAnswer"
         android:onClick="checkAnswer" />
 
@@ -134,7 +133,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text=""
-        android:textSize="20dp"
+        android:textSize="36sp"
         android:textColor="#000" />
 
 </RelativeLayout>

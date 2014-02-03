@@ -22,19 +22,11 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void startFoilActivity(View v) {
-    	Intent intent = new Intent(this, FoilActivity.class);
-    	startActivity(intent);
-    }
     
 
-    public void startWordProbActivity(View v) {
-    	Intent intent = new Intent(this, WordProbActivity.class);
-    	startActivity(intent);
-    }
-
-    public void startSolveForX(View v) {
-    	Intent intent = new Intent(this, SolveForX.class);
+    public void startProblemSelect(View v) {
+    	Intent intent = new Intent(this, ProblemSelect.class);
+    	intent.putExtra("activityID", v.getId());
     	startActivity(intent);
     }
     

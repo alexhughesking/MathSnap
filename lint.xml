@@ -2,5 +2,6 @@
 <lint>
     <issue id="NewApi">
         <ignore path="src/uf/seniorproj/alexryan/FoilActivity.java" />
+        <ignore path="src/uf/seniorproj/alexryan/ProblemSelect.java" />
     </issue>
 </lint>

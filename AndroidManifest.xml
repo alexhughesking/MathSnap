@@ -11,11 +11,11 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
-        android:theme="@style/Theme.Mytheme"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Mytheme" >
         <activity
             android:name="uf.seniorproj.alexryan.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,22 +24,20 @@
         </activity>
         <activity
             android:name="uf.seniorproj.alexryan.FoilActivity"
-            android:label="@string/title_activity_foil"
-            android:windowSoftInputMode="adjustResize" >
+            android:label="@string/title_activity_foil" >
         </activity>
-
         <activity
             android:name="uf.seniorproj.alexryan.SolveForX"
             android:label="@string/title_activity_solve_for_x" >
         </activity>
-
-        
         <activity
             android:name="uf.seniorproj.alexryan.WordProbActivity"
             android:label="@string/title_activity_word_prob" >
         </activity>
-
-
+        <activity
+            android:name="uf.seniorproj.alexryan.ProblemSelect"
+            android:label="@string/title_activity_problem_select" >
+        </activity>
     </application>
 
 </manifest>

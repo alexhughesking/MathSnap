@@ -107,6 +107,8 @@ public class WordProbActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle extras = getIntent().getExtras();
+		curProb = extras.getInt("probNum");//set the problem that was selected
 		loadActivity();
 	}
 

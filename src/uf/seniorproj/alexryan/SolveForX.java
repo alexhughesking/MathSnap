@@ -112,6 +112,10 @@ public class SolveForX extends Activity {
 	}
 	
 	public void addTerm(View v) {
+		if (selectedTerm == null) {
+			Toast.makeText(this, "Select a term by tapping on it.", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		if (isTermLeft) {
 			isTermLeft = false;	
 			selectedTerm.coeff = -1 * selectedTerm.coeff;

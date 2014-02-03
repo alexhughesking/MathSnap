@@ -1,0 +1,289 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".ProblemSelect" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+        
+                
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+		android:layout_weight="0.5"
+        android:text="" />
+     
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="0dip"
+         android:layout_weight="1">
+                    <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        android:text=""       />
+         
+             <TextView
+        android:id="@+id/probSelectText"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:text="F.O.I.L"
+        android:gravity="center"
+        android:background="#FFF"
+        android:textSize="20dp" />
+             
+                        <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        android:text=""       />
+             
+     </LinearLayout>
+
+
+    
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+		android:layout_weight="1"
+        android:text="" />
+       
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        
+           <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:text=""       />
+        
+           
+                  <TextView
+        android:id="@+id/selectProb1"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="1" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                  
+                  <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                  
+                  <TextView
+        android:id="@+id/selectProb2"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="2" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                  
+                  <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                                    
+                  <TextView
+        android:id="@+id/selectProb3"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="3" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                  
+                  <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                                                      
+                 <TextView
+        android:id="@+id/selectProb4"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="4" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                 
+                 <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                                                                        
+                 <TextView
+        android:id="@+id/selectProb5"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="5" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                 
+                 
+                 <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:text=""       />
+           
+       </LinearLayout>
+        
+       <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+		android:layout_weight="1"
+        android:text="" />
+       
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        
+           <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:text=""       />
+        
+           
+                  <TextView
+        android:id="@+id/selectProb6"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="6" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                  
+                  <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                  
+                  <TextView
+        android:id="@+id/selectProb7"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="7" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                  
+                  <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                                    
+                  <TextView
+        android:id="@+id/selectProb8"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="8" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                  
+                  <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                                                      
+                 <TextView
+        android:id="@+id/selectProb9"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="9" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                 
+                 <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:text=""       />
+                                                                        
+                 <TextView
+        android:id="@+id/selectProb10"
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="10" 
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:textSize="20dp"
+        android:clickable="true"
+        android:onClick="startProblem"/>
+                 
+                 
+                 <TextView 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:text=""       />
+           
+       </LinearLayout>
+        
+        
+             <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+		android:layout_weight="1"
+        android:text="" />
+        
+        
+               
+    </LinearLayout>
+
+
+    
+
+</RelativeLayout>

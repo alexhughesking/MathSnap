@@ -55,7 +55,7 @@ public class FoilActivity extends Activity {
 		focusStealer = (LinearLayout)findViewById(R.id.foilFocusStealer);
 		
 		TextView xSquared = (TextView)findViewById(R.id.foilTextView1);
-		xSquared.setText(Html.fromHtml("x <sup><small>2</small></sup> + "));
+		xSquared.setText(Html.fromHtml("x<sup><small>2</small></sup> + "));
 		
 		
 	}

@@ -23,14 +23,14 @@
                 />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/mainFOIL"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="F.O.I.L." 
                 android:gravity="center"
                 android:background="#FF6B6B"
                 android:clickable="true"
-                android:onClick="startFoilActivity" />"
+                android:onClick="startProblemSelect" />"
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -54,14 +54,14 @@
                 android:padding="0dip"/>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/mainWordProblems"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="Word Problems" 
                 android:gravity="center"
                 android:background="#C7F464"
                 android:clickable="true"
-                android:onClick="startWordProbActivity"/>
+                android:onClick="startProblemSelect"/>
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -85,14 +85,14 @@
                 android:padding="0dip"/>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/mainSolveForX"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="Solve for X" 
                 android:gravity="center"
                 android:background="#C44D58"
                 android:clickable="true"
-                android:onClick="startSolveForX"/>
+                android:onClick="startProblemSelect"/>
 
             <ImageView
                 android:id="@+id/imageView6"
