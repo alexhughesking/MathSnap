@@ -19,7 +19,7 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/x" 
+                android:src="@drawable/foil2" 
                 />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/x" />
+                android:src="@drawable/progress3" />
  
         </TableRow>
         
@@ -50,7 +50,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/x" 
+                android:src="@drawable/wp" 
                 android:padding="0dip"/>
 
             <TextView
@@ -67,7 +67,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/x" />
+                android:src="@drawable/progress0" />
             
 		</TableRow>
 		
@@ -98,7 +98,7 @@
                 android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/x" />
+                android:src="@drawable/progress0" />
             
 		</TableRow>
     </TableLayout>

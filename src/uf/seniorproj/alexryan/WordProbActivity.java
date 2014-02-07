@@ -11,16 +11,16 @@ public class WordProbActivity extends Activity {
 	
 	int curProb = 0;
 
-	String[] question = {"1) A passenger plane made a trip to Las Vegas and back. On the trip there it flew 432 mph and on the return trip it went 480 mph. How long did the trip there take if the return trip took nine hours?",
-			              "qusetion2",
-			              "question3",
-			              "question4",
-			              "question5",
-			              "question6",
-			              "question7",
-			              "question8",
-			              "question9",
-			              "question10"};
+	String[] question = { "1) A passenger plane made a trip to Las Vegas and back. On the trip there it flew 432 mph and on the return trip it went 480 mph. How long did the trip there take if the return trip took nine hours?",
+			              "2) If 4 apples and 2 oranges equals $1 and 2 apples and 3 orange equals $0.70, how much does each apple and each orange cost? ",
+			              "3) The sum of two numbers is 16. The difference is 4. What are the two numbers?",
+			              "4) The area of a rectangle is 24 cm2. The width is two less than the length. What is the length and width of the rectangle? ",
+			              "5) Twenty-five years ago, Hailey was five more than one-third as old as Jason was. Today, Jason is twenty-six less than two times the age of Hailey. How old is Jason?",
+			              "6) Austin has nickels, dimes and quarters. He has a total of $17.65. He has eleven fewer quarters than nickels and six times as many dimes as quarters. How many of each coin does he have?",
+			              "7) What are two consecutive integers, such that seven times the larger minus three times the smaller is 95?",
+			              "8) The ratio of votes for Brian to votes for Jose in an election is 13:5. There were a total of 1,530 votes. How many people voted for Jose?",
+			              "9) A small town has averaged 1.7 inches of rain per month from January to April. What must be the average monthly rainfall from May to December so that the average rainfall for the entire year will be approximately 1.43 inches per month?",
+			              "10) A baseball team won three more than three times the number of games lost. If the team played fifty-one games, how many games did the team lose?"};
 	
 	String[] a = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10"};
 	String[] b = {"b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10"};
