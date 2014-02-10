@@ -1,7 +1,9 @@
 package uf.seniorproj.alexryan;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -10,11 +12,13 @@ import android.widget.Toast;
 public class WordProbActivity extends Activity {
 	
 	int curProb = 0;
+	SharedPreferences sPref;
+	SharedPreferences.Editor sPrefEdit;
 
 	String[] question = { "1) A passenger plane made a trip to Las Vegas and back. On the trip there it flew 432 mph and on the return trip it went 480 mph. How long did the trip there take if the return trip took nine hours?",
 			              "2) If 4 apples and 2 oranges equals $1 and 2 apples and 3 orange equals $0.70, how much does each apple and each orange cost? ",
 			              "3) The sum of two numbers is 16. The difference is 4. What are the two numbers?",
-			              "4) The area of a rectangle is 24 cm2. The width is two less than the length. What is the length and width of the rectangle? ",
+			              "4) The area of a rectangle is 24 cm<sup><small>2</small></sup>. The width is two less than the length. What is the length and width of the rectangle? ",
 			              "5) Twenty-five years ago, Hailey was five more than one-third as old as Jason was. Today, Jason is twenty-six less than two times the age of Hailey. How old is Jason?",
 			              "6) Austin has nickels, dimes and quarters. He has a total of $17.65. He has eleven fewer quarters than nickels and six times as many dimes as quarters. How many of each coin does he have?",
 			              "7) What are two consecutive integers, such that seven times the larger minus three times the smaller is 95?",
@@ -32,7 +36,7 @@ public class WordProbActivity extends Activity {
 		setContentView(R.layout.activity_word_prob);
 		
 		TextView problem = (TextView)findViewById(R.id.wordProblem);
-		problem.setText(question[curProb]);
+		problem.setText(Html.fromHtml(question[curProb]));
 		
 		TextView aRow = (TextView)findViewById(R.id.a);
 		aRow.setText(a[curProb]);
@@ -52,36 +56,38 @@ public class WordProbActivity extends Activity {
 	    switch (v.getId()) {
 	    case (R.id.a):
 	        if(a[curProb].equals(ans[curProb]))
-	        	ansCorrect();
+	        	ansCorrect(curProb);
 	        else
-	        	ansWrong();
+	        	ansWrong(curProb);
 	    break;
 	    case (R.id.b):
 	    	if(b[curProb].equals(ans[curProb]))
-	        	ansCorrect();
+	        	ansCorrect(curProb);
 	        else
-	        	ansWrong();
+	        	ansWrong(curProb);
 	    break;
 	    case (R.id.c):
 	    	if(c[curProb].equals(ans[curProb]))
-	        	ansCorrect();
+	        	ansCorrect(curProb);
 	        else
-	        	ansWrong();
+	        	ansWrong(curProb);
 	    break;
 	    case (R.id.d):
 	    	if(d[curProb].equals(ans[curProb]))
-	        	ansCorrect();
+	        	ansCorrect(curProb);
 	        else
-	        	ansWrong();
+	        	ansWrong(curProb);
 	    break;
 	    }
 	}
 	
-	public void ansCorrect(){//do this when correct
+	public void ansCorrect(int cp){//do this when correct
+		sPrefEdit.putString("wp"+String.valueOf(cp), "true");
+		sPrefEdit.commit();
 		Toast.makeText(this, "Correct! Well done.", Toast.LENGTH_SHORT).show();
 	}
 	
-	public void ansWrong(){//do this when wrong
+	public void ansWrong(int cp){//do this when wrong
 		Toast.makeText(this, "Oops. Try again!", Toast.LENGTH_SHORT).show();
 	}
 	
@@ -109,6 +115,8 @@ public class WordProbActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		curProb = extras.getInt("probNum");//set the problem that was selected
+		sPref = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
+		sPrefEdit = sPref.edit();
 		loadActivity();
 	}
 
