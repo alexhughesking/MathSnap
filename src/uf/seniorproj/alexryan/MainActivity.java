@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         sPref = getSharedPreferences("shared_preferences", MODE_PRIVATE);
         checkWP();
+        checkFoil();
     }
 
 
