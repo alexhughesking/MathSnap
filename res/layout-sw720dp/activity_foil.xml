@@ -175,5 +175,25 @@
         android:text="= test 3"
         android:visibility="invisible"
         />
+            
+                    <Button
+                android:id="@+id/foilPrev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/checkAnswerButton"
+                android:layout_alignBottom="@+id/checkAnswerButton"
+                android:layout_alignLeft="@+id/linearLayout1"
+                android:text="Previous"
+                android:onClick="prevProb" />
+
+            <Button
+                android:id="@+id/foilNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/checkAnswerButton"
+                android:layout_alignBottom="@+id/checkAnswerButton"
+                android:layout_alignRight="@+id/linearLayout1"
+                android:text="    Next    "
+                android:onClick="nextProb" />
 
 </RelativeLayout>

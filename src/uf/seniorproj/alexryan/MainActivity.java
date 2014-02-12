@@ -103,5 +103,11 @@ public class MainActivity extends Activity {
     			progress.setImageResource(R.drawable.progress10); break;
     	}
     }
+    
+    protected void onRestart() {
+    	super.onRestart();
+    	checkWP();
+    	checkFoil();
+    }
 
 }

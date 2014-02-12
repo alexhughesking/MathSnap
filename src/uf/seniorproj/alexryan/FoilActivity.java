@@ -7,6 +7,9 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +37,10 @@ public class FoilActivity extends Activity {
 	
 	SharedPreferences sPref;//used for saving problem completion state
 	SharedPreferences.Editor sPrefEdit;
+	
+	AlphaAnimation fadeAnswer1, fadeAnswer2, fadeAnswer3;
+	AlphaAnimation fadeCorrect, fadeIncorrectIn, fadeIncorrectOut;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,6 @@ public class FoilActivity extends Activity {
 
 		
 		//Problem information
-		//Will likely be stored in array later
 		a = aData[probNum];
 		b = bData[probNum];
 		c = cData[probNum];
@@ -75,6 +81,134 @@ public class FoilActivity extends Activity {
 		
 		TextView xSquared = (TextView)findViewById(R.id.foilTextView1);
 		xSquared.setText(Html.fromHtml("x<sup><small>2</small></sup> + "));
+		
+		fadeAnswer1 = new AlphaAnimation(0.0f, 1.0f);
+		fadeAnswer1.setDuration(1000);
+		fadeAnswer2 = new AlphaAnimation(0.0f, 1.0f);
+		fadeAnswer2.setDuration(1000);
+		fadeAnswer3 = new AlphaAnimation(0.0f, 1.0f);
+		fadeAnswer3.setDuration(1000);
+		fadeCorrect = new AlphaAnimation(0.0f, 1.0f);
+		fadeCorrect.setDuration(1000);
+		fadeIncorrectIn = new AlphaAnimation(0.0f, 1.0f);
+		fadeIncorrectIn.setDuration(1000);
+		fadeIncorrectOut = new AlphaAnimation(1.0f, 0.0f);
+		fadeIncorrectOut.setDuration(1000);
+		fadeIncorrectOut.setStartOffset(1000);
+		
+		fadeCorrect.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				answer1.setVisibility(View.VISIBLE);
+				answer1.startAnimation(fadeAnswer1);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeIncorrectIn.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				correctText.startAnimation(fadeIncorrectOut);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeIncorrectOut.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				correctText.setVisibility(View.INVISIBLE);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		fadeAnswer1.setAnimationListener(new AnimationListener(){
+
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				answer2.setVisibility(View.VISIBLE);
+				answer2.startAnimation(fadeAnswer2);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeAnswer2.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				answer3.setVisibility(View.VISIBLE);
+				answer3.startAnimation(fadeAnswer3);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		//set focus listeners for changing text color
 		box1.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -122,6 +256,23 @@ public class FoilActivity extends Activity {
 		});
 		
 		
+	}
+	
+	public void loadProblem() {
+		a = aData[probNum];
+		b = bData[probNum];
+		c = cData[probNum];
+		d = dData[probNum];		
+		setProblemText(0);
+		setAnswerText();
+		correctText.setVisibility(View.INVISIBLE);
+		answer1.setVisibility(View.INVISIBLE);
+		answer2.setVisibility(View.INVISIBLE);
+		answer3.setVisibility(View.INVISIBLE);
+		box1.setText("");
+		box2.setText("");
+		box3.setText("");
+		box4.setText("");
 	}
 	
 	public void setAnswerText() {
@@ -358,13 +509,31 @@ public class FoilActivity extends Activity {
 		if (correct) {
 			correctText.setText("Correct! Well done.");
 			correctText.setVisibility(View.VISIBLE);
-			answer1.setVisibility(View.VISIBLE);
-			answer2.setVisibility(View.VISIBLE);
-			answer3.setVisibility(View.VISIBLE);
+			correctText.startAnimation(fadeCorrect);
+
 		}
 		else {
 			correctText.setText("Oops. Try again!");
 			correctText.setVisibility(View.VISIBLE);
+			correctText.startAnimation(fadeIncorrectIn);
+		}
+	}
+	
+	public void prevProb(View v) {
+		if (probNum == 0)
+			Toast.makeText(this, "Cannot go back any further.", Toast.LENGTH_SHORT).show();
+		else {
+			probNum--;
+			loadProblem();
+		}
+	}
+	
+	public void nextProb(View v) {
+		if (probNum == 9)
+			Toast.makeText(this, "No more problems remain.", Toast.LENGTH_SHORT).show();
+		else {
+			probNum++;
+			loadProblem();
 		}
 	}
 
