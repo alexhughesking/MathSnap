@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
     public void checkFoil(){
     	int pCount=0;
     	for(int i=0; i<=10; i++){
-    		if(sPref.getString("wp"+String.valueOf(i), "false").equals("true"))
+    		if(sPref.getString("foil"+String.valueOf(i), "false").equals("true"))
     			pCount++;
     	}
     	ImageView progress = (ImageView) findViewById(R.id.foilProgress);
