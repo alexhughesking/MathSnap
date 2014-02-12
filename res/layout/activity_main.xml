@@ -9,14 +9,14 @@
         android:stretchColumns="1">
 	
         <TableRow 
-            android:id="@+id/tableRow1"
+            android:id="@+id/foilRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
             android:layout_marginTop="10dip" >"
             
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/foilImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/foil2" 
@@ -33,21 +33,21 @@
                 android:onClick="startProblemSelect" />"
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/foilProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/progress3" />
+                android:src="@drawable/progress0" />
  
         </TableRow>
         
         <TableRow 
-            android:id="@+id/tableRow2"
+            android:id="@+id/wpRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip" >
             
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/wpImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/wp" 
@@ -64,7 +64,7 @@
                 android:onClick="startProblemSelect"/>
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/wpProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/progress0" />
@@ -72,13 +72,13 @@
 		</TableRow>
 		
         <TableRow 
-            android:id="@+id/tableRow3"
+            android:id="@+id/s4xRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip" >
             
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/s4xImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/x" 
@@ -95,7 +95,7 @@
                 android:onClick="startProblemSelect"/>
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/s4xProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/progress0" />

@@ -49,6 +49,11 @@ public class WordProbActivity extends Activity {
 		
 		TextView dRow = (TextView)findViewById(R.id.d);
 		dRow.setText(d[curProb]);
+		
+		if(sPref.getString("wp"+String.valueOf(curProb), "false").equals("true")){
+			Toast.makeText(this, "Problem already completed.", Toast.LENGTH_SHORT).show();
+		}
+			
 	}
 	
 	
@@ -58,25 +63,25 @@ public class WordProbActivity extends Activity {
 	        if(a[curProb].equals(ans[curProb]))
 	        	ansCorrect(curProb);
 	        else
-	        	ansWrong(curProb);
+	        	ansWrong();
 	    break;
 	    case (R.id.b):
 	    	if(b[curProb].equals(ans[curProb]))
 	        	ansCorrect(curProb);
 	        else
-	        	ansWrong(curProb);
+	        	ansWrong();
 	    break;
 	    case (R.id.c):
 	    	if(c[curProb].equals(ans[curProb]))
 	        	ansCorrect(curProb);
 	        else
-	        	ansWrong(curProb);
+	        	ansWrong();
 	    break;
 	    case (R.id.d):
 	    	if(d[curProb].equals(ans[curProb]))
 	        	ansCorrect(curProb);
 	        else
-	        	ansWrong(curProb);
+	        	ansWrong();
 	    break;
 	    }
 	}
@@ -87,7 +92,7 @@ public class WordProbActivity extends Activity {
 		Toast.makeText(this, "Correct! Well done.", Toast.LENGTH_SHORT).show();
 	}
 	
-	public void ansWrong(int cp){//do this when wrong
+	public void ansWrong(){//do this when wrong
 		Toast.makeText(this, "Oops. Try again!", Toast.LENGTH_SHORT).show();
 	}
 	
@@ -115,7 +120,7 @@ public class WordProbActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Bundle extras = getIntent().getExtras();
 		curProb = extras.getInt("probNum");//set the problem that was selected
-		sPref = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
+		sPref = getSharedPreferences("shared_preferences", MODE_PRIVATE);
 		sPrefEdit = sPref.edit();
 		loadActivity();
 	}

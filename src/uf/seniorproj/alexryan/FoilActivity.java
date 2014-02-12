@@ -1,6 +1,7 @@
 package uf.seniorproj.alexryan;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
@@ -30,11 +31,17 @@ public class FoilActivity extends Activity {
 	int[] cData = {1, 1, 1, 1, 1, 1, 2, 2, 1, 2};
 	int[] dData = {2, 2, -3, -2, -1, 2, -3, 3, 4, -2};
 	public int probNum;
+	
+	SharedPreferences sPref;//used for saving problem completion state
+	SharedPreferences.Editor sPrefEdit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_foil);
+		
+		sPref = getSharedPreferences("shared_preferences", MODE_PRIVATE);
+		sPrefEdit = sPref.edit();
 		
 		Bundle extras = getIntent().getExtras();
 		probNum = extras.getInt("probNum");//get the problem number that was clicked
@@ -335,6 +342,8 @@ public class FoilActivity extends Activity {
 			ans3 == b*c &&
 			ans4 == b*d) {
 			animateAnswer(true);
+			sPrefEdit.putString("foil"+String.valueOf(probNum), "true");
+			sPrefEdit.commit();
 		}
 		else if (ans1 == a*c &&
 				 ans2 == b*c &&
