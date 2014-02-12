@@ -22,11 +22,14 @@ public class FoilActivity extends Activity {
 	TextView correctText; //correct or try again
 	LinearLayout focusStealer; //to remove focus from editText
 	
+	TextView answer1, answer2, answer3; //the faded in answer
+	
 	int a, b, c, d; //the coefficients for the problem
 	int[] aData = {1, 1, 1, 1, 1, 2, 2, 1, 2, 3};
 	int[] bData = {-1, 2, -2, 4, 1, 1, -1, -5, 7, -1};
 	int[] cData = {1, 1, 1, 1, 1, 1, 2, 2, 1, 2};
 	int[] dData = {2, 2, -3, -2, -1, 2, -3, 3, 4, -2};
+	public int probNum;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class FoilActivity extends Activity {
 		setContentView(R.layout.activity_foil);
 		
 		Bundle extras = getIntent().getExtras();
-		int probNum = extras.getInt("probNum");//get the problem number that was clicked
+		probNum = extras.getInt("probNum");//get the problem number that was clicked
 		
 		
 
@@ -58,6 +61,10 @@ public class FoilActivity extends Activity {
 		
 		correctText = (TextView) findViewById(R.id.foilCorrect);
 		focusStealer = (LinearLayout)findViewById(R.id.foilFocusStealer);
+		answer1 = (TextView) findViewById(R.id.foilDispAnswer1);
+		answer2 = (TextView) findViewById(R.id.foilDispAnswer2);
+		answer3 = (TextView) findViewById(R.id.foilDispAnswer3);
+		setAnswerText();//setProblemText(0) first!
 		
 		TextView xSquared = (TextView)findViewById(R.id.foilTextView1);
 		xSquared.setText(Html.fromHtml("x<sup><small>2</small></sup> + "));
@@ -108,6 +115,65 @@ public class FoilActivity extends Activity {
 		});
 		
 		
+	}
+	
+	public void setAnswerText() {
+		answer1.setText(problem.getText().toString());
+		String text2 = " = ";
+		if (a * c == 1)
+			text2 = text2 + "x<sup><small>2</small></sup> ";
+		else
+			text2 = text2 + (a*c) + "x<sup><small>2</small></sup> ";
+		String text3 = new String(text2);
+		if (a * d < 0) {
+			if (a*d == -1)
+				text2 = text2 + "- " + "x ";
+			else
+				text2 = text2 + "- " + (-1*a*d) + "x ";
+		}
+		else {
+			if (a*d == 1)
+				text2 = text2 + "+ " + "x ";
+			else
+				text2 = text2 + "+ " + (a*d) + "x ";
+		}
+		if (b * c < 0) {
+			if (b*c == -1)
+				text2 = text2 + "- " + "x ";
+			else
+				text2 = text2 + "- " + (-1*b*c) + "x ";
+		}
+		else {
+			if (b*c == 1)
+				text2 = text2 + "+ " + "x ";
+			else
+				text2 = text2 + "+ "  + (b*c) + "x ";
+		}
+		if (b * d < 0)
+			text2 = text2 + "- " + (-1*b*d);
+		else
+			text2 = text2 + "+ " + (b*d);
+		
+		
+		if (a*d + b*c < 0) {
+			if (a*d + b*c == -1)
+				text3 = text3 + "- " + "x ";
+			else
+				text3 = text3 + "- " + (-1*(a*d + b*c)) + "x ";
+		}
+		else if (a*d + b*c > 0) {
+			if (a*d + b*c == 1)
+				text3 = text3 + "+ " + "x ";
+			else
+				text3 = text3 + "+ " + (a*d + b*c) + "x ";
+		}
+		if (b*d < 0)
+			text3 = text3 + "- " + (-1*b*d);
+		else
+			text3 = text3 + "+ " + (b*d);
+		
+		answer2.setText(Html.fromHtml(text2));
+		answer3.setText(Html.fromHtml(text3));
 	}
 	
 	public void setProblemText(int boxNo) {
@@ -268,15 +334,29 @@ public class FoilActivity extends Activity {
 			ans2 == a*d &&
 			ans3 == b*c &&
 			ans4 == b*d) {
-			correctText.setText("Correct! Well done.");
+			animateAnswer(true);
 		}
 		else if (ans1 == a*c &&
 				 ans2 == b*c &&
 				 ans3 == a*d &&
 				 ans4 == b*d)
-			correctText.setText("Correct! Well done.");
+			animateAnswer(true);
 		else
+			animateAnswer(false);
+	}
+	
+	public void animateAnswer(boolean correct) {
+		if (correct) {
+			correctText.setText("Correct! Well done.");
+			correctText.setVisibility(View.VISIBLE);
+			answer1.setVisibility(View.VISIBLE);
+			answer2.setVisibility(View.VISIBLE);
+			answer3.setVisibility(View.VISIBLE);
+		}
+		else {
 			correctText.setText("Oops. Try again!");
+			correctText.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
