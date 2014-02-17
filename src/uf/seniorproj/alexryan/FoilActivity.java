@@ -7,6 +7,9 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +26,8 @@ public class FoilActivity extends Activity {
 	TextView correctText; //correct or try again
 	LinearLayout focusStealer; //to remove focus from editText
 	
+	TextView answer1, answer2, answer3; //the faded in answer
+	
 	int a, b, c, d; //the coefficients for the problem
 	int[] aData = {1, 1, 1, 1, 1, 2, 2, 1, 2, 3};
 	int[] bData = {-1, 2, -2, 4, 1, 1, -1, -5, 7, -1};
@@ -32,6 +37,10 @@ public class FoilActivity extends Activity {
 	
 	SharedPreferences sPref;//used for saving problem completion state
 	SharedPreferences.Editor sPrefEdit;
+	
+	AlphaAnimation fadeAnswer1, fadeAnswer2, fadeAnswer3;
+	AlphaAnimation fadeCorrect, fadeIncorrectIn, fadeIncorrectOut;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +57,6 @@ public class FoilActivity extends Activity {
 
 		
 		//Problem information
-		//Will likely be stored in array later
 		a = aData[probNum];
 		b = bData[probNum];
 		c = cData[probNum];
@@ -66,9 +74,141 @@ public class FoilActivity extends Activity {
 		
 		correctText = (TextView) findViewById(R.id.foilCorrect);
 		focusStealer = (LinearLayout)findViewById(R.id.foilFocusStealer);
+		answer1 = (TextView) findViewById(R.id.foilDispAnswer1);
+		answer2 = (TextView) findViewById(R.id.foilDispAnswer2);
+		answer3 = (TextView) findViewById(R.id.foilDispAnswer3);
+		setAnswerText();//setProblemText(0) first!
 		
 		TextView xSquared = (TextView)findViewById(R.id.foilTextView1);
 		xSquared.setText(Html.fromHtml("x<sup><small>2</small></sup> + "));
+		
+		fadeAnswer1 = new AlphaAnimation(0.0f, 1.0f);
+		fadeAnswer1.setDuration(1000);
+		fadeAnswer2 = new AlphaAnimation(0.0f, 1.0f);
+		fadeAnswer2.setDuration(1000);
+		fadeAnswer3 = new AlphaAnimation(0.0f, 1.0f);
+		fadeAnswer3.setDuration(1000);
+		fadeCorrect = new AlphaAnimation(0.0f, 1.0f);
+		fadeCorrect.setDuration(1000);
+		fadeIncorrectIn = new AlphaAnimation(0.0f, 1.0f);
+		fadeIncorrectIn.setDuration(1000);
+		fadeIncorrectOut = new AlphaAnimation(1.0f, 0.0f);
+		fadeIncorrectOut.setDuration(1000);
+		fadeIncorrectOut.setStartOffset(1000);
+		
+		fadeCorrect.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				answer1.setVisibility(View.VISIBLE);
+				answer1.startAnimation(fadeAnswer1);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeIncorrectIn.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				correctText.startAnimation(fadeIncorrectOut);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeIncorrectOut.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				correctText.setVisibility(View.INVISIBLE);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		fadeAnswer1.setAnimationListener(new AnimationListener(){
+
+			@Override
+			public void onAnimationEnd(Animation arg0) {
+				answer2.setVisibility(View.VISIBLE);
+				answer2.startAnimation(fadeAnswer2);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeAnswer2.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				answer3.setVisibility(View.VISIBLE);
+				answer3.startAnimation(fadeAnswer3);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		//set focus listeners for changing text color
 		box1.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -116,6 +256,82 @@ public class FoilActivity extends Activity {
 		});
 		
 		
+	}
+	
+	public void loadProblem() {
+		a = aData[probNum];
+		b = bData[probNum];
+		c = cData[probNum];
+		d = dData[probNum];		
+		setProblemText(0);
+		setAnswerText();
+		correctText.setVisibility(View.INVISIBLE);
+		answer1.setVisibility(View.INVISIBLE);
+		answer2.setVisibility(View.INVISIBLE);
+		answer3.setVisibility(View.INVISIBLE);
+		box1.setText("");
+		box2.setText("");
+		box3.setText("");
+		box4.setText("");
+	}
+	
+	public void setAnswerText() {
+		answer1.setText(problem.getText().toString());
+		String text2 = " = ";
+		if (a * c == 1)
+			text2 = text2 + "x<sup><small>2</small></sup> ";
+		else
+			text2 = text2 + (a*c) + "x<sup><small>2</small></sup> ";
+		String text3 = new String(text2);
+		if (a * d < 0) {
+			if (a*d == -1)
+				text2 = text2 + "- " + "x ";
+			else
+				text2 = text2 + "- " + (-1*a*d) + "x ";
+		}
+		else {
+			if (a*d == 1)
+				text2 = text2 + "+ " + "x ";
+			else
+				text2 = text2 + "+ " + (a*d) + "x ";
+		}
+		if (b * c < 0) {
+			if (b*c == -1)
+				text2 = text2 + "- " + "x ";
+			else
+				text2 = text2 + "- " + (-1*b*c) + "x ";
+		}
+		else {
+			if (b*c == 1)
+				text2 = text2 + "+ " + "x ";
+			else
+				text2 = text2 + "+ "  + (b*c) + "x ";
+		}
+		if (b * d < 0)
+			text2 = text2 + "- " + (-1*b*d);
+		else
+			text2 = text2 + "+ " + (b*d);
+		
+		
+		if (a*d + b*c < 0) {
+			if (a*d + b*c == -1)
+				text3 = text3 + "- " + "x ";
+			else
+				text3 = text3 + "- " + (-1*(a*d + b*c)) + "x ";
+		}
+		else if (a*d + b*c > 0) {
+			if (a*d + b*c == 1)
+				text3 = text3 + "+ " + "x ";
+			else
+				text3 = text3 + "+ " + (a*d + b*c) + "x ";
+		}
+		if (b*d < 0)
+			text3 = text3 + "- " + (-1*b*d);
+		else
+			text3 = text3 + "+ " + (b*d);
+		
+		answer2.setText(Html.fromHtml(text2));
+		answer3.setText(Html.fromHtml(text3));
 	}
 	
 	public void setProblemText(int boxNo) {
@@ -276,17 +492,49 @@ public class FoilActivity extends Activity {
 			ans2 == a*d &&
 			ans3 == b*c &&
 			ans4 == b*d) {
-			correctText.setText("Correct! Well done.");
-//			sPrefEdit.putString("foil"+String.valueOf(probNum), "true");
-//			sPrefEdit.commit();
+			animateAnswer(true);
+			sPrefEdit.putString("foil"+String.valueOf(probNum), "true");
+			sPrefEdit.commit();
 		}
 		else if (ans1 == a*c &&
 				 ans2 == b*c &&
 				 ans3 == a*d &&
 				 ans4 == b*d)
-			correctText.setText("Correct! Well done.");
+			animateAnswer(true);
 		else
+			animateAnswer(false);
+	}
+	
+	public void animateAnswer(boolean correct) {
+		if (correct) {
+			correctText.setText("Correct! Well done.");
+			correctText.setVisibility(View.VISIBLE);
+			correctText.startAnimation(fadeCorrect);
+
+		}
+		else {
 			correctText.setText("Oops. Try again!");
+			correctText.setVisibility(View.VISIBLE);
+			correctText.startAnimation(fadeIncorrectIn);
+		}
+	}
+	
+	public void prevProb(View v) {
+		if (probNum == 0)
+			Toast.makeText(this, "Cannot go back any further.", Toast.LENGTH_SHORT).show();
+		else {
+			probNum--;
+			loadProblem();
+		}
+	}
+	
+	public void nextProb(View v) {
+		if (probNum == 9)
+			Toast.makeText(this, "No more problems remain.", Toast.LENGTH_SHORT).show();
+		else {
+			probNum++;
+			loadProblem();
+		}
 	}
 
 	@Override
