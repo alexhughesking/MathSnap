@@ -1,6 +1,8 @@
 package uf.seniorproj.alexryan;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sPref = getSharedPreferences("shared_preferences", MODE_PRIVATE);
+		sPrefEdit = sPref.edit();
         checkWP();
         checkFoil();
     }
@@ -30,12 +33,30 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    
-
     public void startProblemSelect(View v) {
     	Intent intent = new Intent(this, ProblemSelect.class);
     	intent.putExtra("activityID", v.getId());
     	startActivity(intent);
+    }
+    
+    public void clearProgress(View v){
+    	new AlertDialog.Builder(this)
+        .setTitle("Clear All Progress")
+        .setMessage("Are you sure you want to clear all of your current progress?")
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) { 
+            	sPrefEdit.clear();
+            	sPrefEdit.commit();
+            	onRestart();
+            }
+         })
+        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) { 
+                // do nothing
+            }
+         })
+//        .setIcon(R.drawable.x)
+         .show();
     }
     
     public void checkWP (){
