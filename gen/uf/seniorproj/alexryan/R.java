@@ -72,16 +72,16 @@ public final class R {
         public static final int x=0x7f020030;
     }
     public static final class id {
-        public static final int a=0x7f08002e;
-        public static final int action_settings=0x7f080035;
+        public static final int a=0x7f080031;
+        public static final int action_settings=0x7f080038;
         public static final int arrowLayout=0x7f08000a;
-        public static final int b=0x7f08002f;
-        public static final int blankSpace=0x7f08002d;
-        public static final int buildEqn=0x7f08002c;
-        public static final int buttonSpace=0x7f080033;
-        public static final int c=0x7f080030;
+        public static final int b=0x7f080032;
+        public static final int blankSpace=0x7f080030;
+        public static final int buildEqn=0x7f08002f;
+        public static final int buttonSpace=0x7f080036;
+        public static final int c=0x7f080033;
         public static final int checkAnswerButton=0x7f08000b;
-        public static final int d=0x7f080031;
+        public static final int d=0x7f080034;
         public static final int foilCorrect=0x7f08000c;
         public static final int foilDispAnswer1=0x7f08000e;
         public static final int foilDispAnswer2=0x7f08000d;
@@ -104,8 +104,8 @@ public final class R {
         public static final int mainFOIL=0x7f080014;
         public static final int mainSolveForX=0x7f08001c;
         public static final int mainWordProblems=0x7f080018;
-        public static final int next=0x7f080034;
-        public static final int prev=0x7f080032;
+        public static final int next=0x7f080037;
+        public static final int prev=0x7f080035;
         public static final int probSelectText=0x7f08001e;
         public static final int s4xImage=0x7f08001b;
         public static final int s4xProgress=0x7f08001d;
@@ -120,9 +120,12 @@ public final class R {
         public static final int selectProb7=0x7f080025;
         public static final int selectProb8=0x7f080026;
         public static final int selectProb9=0x7f080027;
-        public static final int solveXButton=0x7f08002a;
+        public static final int solveXCombineButton=0x7f08002b;
+        public static final int solveXDivideButton=0x7f08002c;
         public static final int solveXEqn=0x7f080029;
-        public static final int wordProblem=0x7f08002b;
+        public static final int solveXMoveTermButton=0x7f08002a;
+        public static final int solveXMultiplyButton=0x7f08002d;
+        public static final int wordProblem=0x7f08002e;
         public static final int wpImage=0x7f080017;
         public static final int wpProgress=0x7f080019;
         public static final int wpRow=0x7f080016;
