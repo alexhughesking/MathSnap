@@ -50,9 +50,9 @@ public class WordProbActivity extends Activity {
 		TextView dRow = (TextView)findViewById(R.id.d);
 		dRow.setText(d[curProb]);
 		
-		if(sPref.getString("wp"+String.valueOf(curProb), "false").equals("true")){
-			Toast.makeText(this, "Problem already completed.", Toast.LENGTH_SHORT).show();
-		}
+//		if(sPref.getString("wp"+String.valueOf(curProb), "false").equals("true")){
+//			Toast.makeText(this, "Problem already completed.", Toast.LENGTH_SHORT).show();
+//		}
 			
 	}
 	
