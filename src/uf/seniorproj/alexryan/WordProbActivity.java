@@ -1,11 +1,14 @@
 package uf.seniorproj.alexryan;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +17,10 @@ public class WordProbActivity extends Activity {
 	int curProb = 0;
 	SharedPreferences sPref;
 	SharedPreferences.Editor sPrefEdit;
+	RadioButton rba;
+	RadioButton rbb;
+	RadioButton rbc;
+	RadioButton rbd;
 
 	String[] question = { "1) A passenger plane made a trip to Las Vegas and back. On the trip there it flew 432 mph and on the return trip it went 480 mph. How long did the trip there take if the return trip took nine hours?",
 			              "2) If 4 apples and 2 oranges equals $1 and 2 apples and 3 orange equals $0.70, how much does each apple and each orange cost? ",
@@ -31,6 +38,8 @@ public class WordProbActivity extends Activity {
 	String[] c = {"c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"};
 	String[] d = {"d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10"};
 	String[] ans = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10"};
+	String[] hint1 = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10"};
+	String[] hint2 = {"b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10"};
 	
 	public void loadActivity(){//allow for new problems to be loaded on call
 		setContentView(R.layout.activity_word_prob);
@@ -50,45 +59,62 @@ public class WordProbActivity extends Activity {
 		TextView dRow = (TextView)findViewById(R.id.d);
 		dRow.setText(d[curProb]);
 		
-//		if(sPref.getString("wp"+String.valueOf(curProb), "false").equals("true")){
-//			Toast.makeText(this, "Problem already completed.", Toast.LENGTH_SHORT).show();
-//		}
-			
+		//if problem already answered correctly
+		//block all radio buttons from being clicked and set the correct answer to already clicked
+//		if(sPref.getString("wp"+String.valueOf(curProb), "false").equals("true"))
+//			setRadioButtons(ansId[curProb].getId());	
 	}
 	
 	
 	public void checkAns(View v){//see if the answer chosen is correct
-	    switch (v.getId()) {
-	    case (R.id.a):
-	        if(a[curProb].equals(ans[curProb]))
-	        	ansCorrect(curProb);
-	        else
-	        	ansWrong();
-	    break;
-	    case (R.id.b):
-	    	if(b[curProb].equals(ans[curProb]))
-	        	ansCorrect(curProb);
-	        else
-	        	ansWrong();
-	    break;
-	    case (R.id.c):
-	    	if(c[curProb].equals(ans[curProb]))
-	        	ansCorrect(curProb);
-	        else
-	        	ansWrong();
-	    break;
-	    case (R.id.d):
-	    	if(d[curProb].equals(ans[curProb]))
-	        	ansCorrect(curProb);
-	        else
-	        	ansWrong();
-	    break;
-	    }
+		if(!sPref.getString("wp"+String.valueOf(curProb), "false").equals("true")){
+		    switch (v.getId()) {
+		    case (R.id.a):
+		        if(a[curProb].equals(ans[curProb])){
+		        	ansCorrect();
+		    		setRadioButtons(v.getId());
+		        }
+		        else
+		        	ansWrong();
+		    break;
+		    case (R.id.b):
+		    	if(b[curProb].equals(ans[curProb])){
+		    		ansCorrect();
+	    			setRadioButtons(v.getId());
+		    	}
+		        else
+		        	ansWrong();
+		    break;
+		    case (R.id.c):
+		    	if(c[curProb].equals(ans[curProb])){
+		    		ansCorrect();
+		    		setRadioButtons(v.getId());
+		    	}
+		        else
+		        	ansWrong();
+		    break;
+		    case (R.id.d):
+		    	if(d[curProb].equals(ans[curProb])){
+		    		ansCorrect();
+		    		setRadioButtons(v.getId());
+		    	}
+		        else
+		        	ansWrong();
+		    break;
+		    }
+		}
 	}
 	
-	public void ansCorrect(int cp){//do this when correct
-		sPrefEdit.putString("wp"+String.valueOf(cp), "true");
+	public void ansCorrect(){
+		//store problem as answered
+		sPrefEdit.putString("wp"+String.valueOf(curProb), "true");
 		sPrefEdit.commit();
+		
+		rba.setClickable(false);
+		rbb.setClickable(false);
+		rbc.setClickable(false);
+		rbd.setClickable(false);
+		
 		Toast.makeText(this, "Correct! Well done.", Toast.LENGTH_SHORT).show();
 	}
 	
@@ -114,6 +140,64 @@ public class WordProbActivity extends Activity {
 		}
 	}
 	
+	public void hint1(final View v){
+    	new AlertDialog.Builder(this)
+        .setTitle("Hint 1")
+        .setMessage(hint1[curProb])
+        .setPositiveButton("Next Hint", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) { 
+            	hint2(v);
+            }
+         })
+        .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) { 
+                // do nothing
+            }
+         })
+//        .setIcon(R.drawable.x)
+         .show();
+	}
+	
+	public void hint2(final View v){
+		new AlertDialog.Builder(this)
+        .setTitle("Hint 2")
+        .setMessage(hint2[curProb])
+        .setPositiveButton("Prev Hint", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) { 
+            	hint1(v);
+            }
+         })
+        .setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) { 
+                // do nothing
+            }
+         })
+//        .setIcon(R.drawable.x)
+         .show();
+	}
+	
+	public void setRadioButtons(int id){
+		rba.setClickable(false);
+		rbb.setClickable(false);
+		rbc.setClickable(false);
+		rbd.setClickable(false);
+		
+		switch(id){
+		case(R.id.a):
+			rba.setChecked(true);
+		break;
+		case(R.id.b):
+			rbb.setChecked(true);
+		break;
+		case(R.id.c):
+			rbc.setChecked(true);
+		break;
+		case(R.id.d):
+			rbd.setChecked(true);
+		break;
+		}
+	}
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +206,10 @@ public class WordProbActivity extends Activity {
 		curProb = extras.getInt("probNum");//set the problem that was selected
 		sPref = getSharedPreferences("shared_preferences", MODE_PRIVATE);
 		sPrefEdit = sPref.edit();
+		rba = (RadioButton) findViewById(R.id.a);
+		rbb = (RadioButton) findViewById(R.id.b);
+		rbc = (RadioButton) findViewById(R.id.c);
+		rbd = (RadioButton) findViewById(R.id.d);
 		loadActivity();
 	}
 
