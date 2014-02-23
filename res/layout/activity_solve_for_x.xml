@@ -12,19 +12,49 @@
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/solveXEqn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" >
     </LinearLayout>
 
     <Button
-        android:id="@+id/solveXButton"
+        android:id="@+id/solveXMoveTermButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/solveXEqn"
         android:layout_centerHorizontal="true"
         android:text="Move Term"
         android:onClick="addTerm" />
+
+    <Button
+        android:id="@+id/solveXCombineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/solveXMoveTermButton"
+        android:layout_alignBottom="@id/solveXMoveTermButton"
+        android:layout_toLeftOf="@id/solveXMoveTermButton"
+        android:text="Combine With"
+        android:onClick="selectCombine" />
+
+    <Button
+        android:id="@+id/solveXDivideButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/solveXMoveTermButton"
+        android:layout_toRightOf="@+id/solveXMoveTermButton"
+        android:text="Divide by"
+        android:onClick="divide" />
+
+    <Button
+        android:id="@+id/solveXMultiplyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/solveXDivideButton"
+        android:layout_alignBottom="@+id/solveXDivideButton"
+        android:layout_toRightOf="@+id/solveXDivideButton"
+        android:text="Multiply By"
+        android:onClick="multiply" />
 
 </RelativeLayout>
