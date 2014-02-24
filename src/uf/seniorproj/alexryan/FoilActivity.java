@@ -23,6 +23,7 @@ public class FoilActivity extends Activity {
 	EditText box4; //constant
 	
 	TextView problem; //the problem at the top
+	TextView probNumView; //the problem number in the corner
 	TextView correctText; //correct or try again
 	LinearLayout focusStealer; //to remove focus from editText
 	
@@ -56,16 +57,17 @@ public class FoilActivity extends Activity {
 		
 
 		
-		//Problem information
-		a = aData[probNum];
-		b = bData[probNum];
-		c = cData[probNum];
-		d = dData[probNum];
+//		//Problem information
+//		a = aData[probNum];
+//		b = bData[probNum];
+//		c = cData[probNum];
+//		d = dData[probNum];
 		
 		//initialize
 		//Set the problem at the top
 		problem = (TextView)findViewById(R.id.foilProblem);
-		setProblemText(0);//set the text at the top
+		probNumView = (TextView)findViewById(R.id.foilProbNum);
+		//setProblemText(0);//set the text at the top
 		
 		box1 = (EditText)findViewById(R.id.foilEditText1);
 		box2 = (EditText)findViewById(R.id.foilEditText2);
@@ -77,7 +79,10 @@ public class FoilActivity extends Activity {
 		answer1 = (TextView) findViewById(R.id.foilDispAnswer1);
 		answer2 = (TextView) findViewById(R.id.foilDispAnswer2);
 		answer3 = (TextView) findViewById(R.id.foilDispAnswer3);
-		setAnswerText();//setProblemText(0) first!
+		
+		
+		loadProblem();
+		//setAnswerText();//setProblemText(0) first!
 		
 		TextView xSquared = (TextView)findViewById(R.id.foilTextView1);
 		xSquared.setText(Html.fromHtml("x<sup><small>2</small></sup> + "));
@@ -259,12 +264,36 @@ public class FoilActivity extends Activity {
 	}
 	
 	public void loadProblem() {
+		//initialize problem data
 		a = aData[probNum];
 		b = bData[probNum];
 		c = cData[probNum];
-		d = dData[probNum];		
+		d = dData[probNum];	
+		
+		//clear any ongoing animations
+		correctText.clearAnimation();
+		answer1.clearAnimation();
+		answer2.clearAnimation();
+		answer3.clearAnimation();
+		
+		//reset problem and answer text
+		probNumView.setText((probNum + 1) + ")");
 		setProblemText(0);
 		setAnswerText();
+		
+		//fill in answer if prob already completed
+		if(sPref.getString("foil"+String.valueOf(probNum), "false").equals("true")){
+			correctText.setText("Correct! Well done.");
+			correctText.setVisibility(View.VISIBLE);
+			answer1.setVisibility(View.VISIBLE);
+			answer2.setVisibility(View.VISIBLE);
+			answer3.setVisibility(View.VISIBLE);
+			box1.setText(String.valueOf(a*c));
+			box2.setText(String.valueOf(a*d));
+			box3.setText(String.valueOf(b*c));
+			box4.setText(String.valueOf(b*d));
+		}
+		else {
 		correctText.setVisibility(View.INVISIBLE);
 		answer1.setVisibility(View.INVISIBLE);
 		answer2.setVisibility(View.INVISIBLE);
@@ -273,11 +302,12 @@ public class FoilActivity extends Activity {
 		box2.setText("");
 		box3.setText("");
 		box4.setText("");
+		}
 	}
 	
 	public void setAnswerText() {
 		answer1.setText(problem.getText().toString());
-		String text2 = " = ";
+		String text2 = "&nbsp;&nbsp;=&nbsp;&nbsp;";
 		if (a * c == 1)
 			text2 = text2 + "x<sup><small>2</small></sup> ";
 		else

@@ -208,4 +208,13 @@
                 android:text="    Next    "
                 android:onClick="nextProb" />
 
+            <TextView
+                android:id="@+id/foilProbNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text=""
+                android:textSize="20dp" />
+
 </RelativeLayout>
