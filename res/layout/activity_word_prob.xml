@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="question"
-            android:layout_weight="1" />    
+            android:layout_weight="0" />    
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,9 +30,9 @@
                 android:id="@+id/hint1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hint1"
+                android:text="Hint 1"
                 android:layout_weight="1"
-                android:onClick="prevProb" />
+                android:onClick="hint1" />
 
             <TextView
                 android:id="@+id/buttonSpace"
@@ -44,9 +44,9 @@
                 android:id="@+id/hint2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hint2" 
+                android:text="Hint 2" 
                 android:layout_weight="1"
-                android:onClick="nextProb"/>
+                android:onClick="hint2"/>
 
         </LinearLayout>
 
