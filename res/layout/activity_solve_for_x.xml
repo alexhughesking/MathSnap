@@ -47,14 +47,46 @@
         android:text="Divide by"
         android:onClick="divide" />
 
+        <Button
+        android:id="@+id/solveXDistributeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/solveXMoveTermButton"
+        android:layout_toRightOf="@id/solveXCombineButton"
+        android:layout_centerHorizontal="true"
+        android:text="Distribute"
+        android:onClick="distribute" />
+        
     <Button
         android:id="@+id/solveXMultiplyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/solveXDivideButton"
-        android:layout_alignBottom="@+id/solveXDivideButton"
-        android:layout_toRightOf="@+id/solveXDivideButton"
+        android:layout_alignBaseline="@id/solveXDistributeButton"
+        android:layout_toRightOf="@id/solveXMoveTermButton"
         android:text="Multiply By"
         android:onClick="multiply" />
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/solveXStatusBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+          >
+            <TextView
+        android:id="@+id/solveXStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:text="Select a term to begin."
+        android:textSize="50dp"
+        android:textColor="#000"
+         />
+    </LinearLayout>
+
 
 </RelativeLayout>

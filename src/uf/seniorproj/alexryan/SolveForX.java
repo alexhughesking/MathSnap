@@ -19,9 +19,11 @@ public class SolveForX extends Activity {
 	
 	ArrayList<Term> LHS, RHS;
 	Term selectedTerm;
-	boolean isTermLeft;
-	boolean combinePressed;
-	LinearLayout eqn;
+	boolean isTermLeft;//which side it's on
+	boolean combinePressed;//next selected term should be combined
+	LinearLayout eqn;//the equation which contains LHS and RHS
+	OnClickListener myClicker;//to select term and change color
+	TextView status;//displays the last operation performed
 	TextView t0;//"="
 	TextView tz;//"0"
 	
@@ -32,26 +34,26 @@ public class SolveForX extends Activity {
 		setContentView(R.layout.activity_solve_for_x);
 		
 		eqn = (LinearLayout)findViewById(R.id.solveXEqn);
+		status = (TextView)findViewById(R.id.solveXStatus);
 		
-		final Context context = this;
 		combinePressed = false;
 
 		LHS = new ArrayList<Term>(5);
 		RHS = new ArrayList<Term>(5);
 		
-		OnClickListener myClicker = new OnClickListener() {
+		myClicker = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Term t = (Term)v;
-				if (combinePressed) {
+				Term t = (Term)v;//what they clicked on
+				if (combinePressed) {//user trying to combine
 					Boolean combineLeft = false;
 					for (int i = 0; i < LHS.size(); i++)
 						if (LHS.get(i) == t)
-							combineLeft = true;
+							combineLeft = true;//terms must be on same side to combine
 					combineTerm(t, combineLeft);
 				}
 				else {
-				selectedTerm = t;
+				selectedTerm = t;//what they clicked on
 				
 				for (int i = 0; i < LHS.size(); i++) {
 					LHS.get(i).setTextColor(Color.BLACK);
@@ -86,25 +88,32 @@ public class SolveForX extends Activity {
 		tz.setTextSize(50);
 		tz.setTextColor(Color.BLACK);
 		
-		Term t1 = new Term(this, 2, 1, 'x');
+		Term test1 = new Term(this, 1, 1, 'x', null);
+		Term test2 = new Term(this, -2, 1, '1', null);
+		
+		Term[] testPt = {test1, test2};
+		
+		Term t1 = new Term(this, 3, 2, '(', testPt);
 		t1.setTextSize(50);
 		t1.setTextColor(Color.BLACK);
 		
 		
 	
-		Term t2 = new Term(this, -1, 1, '1');
+		Term t2 = new Term(this, -1, 1, '1', null);
 		t2.setTextSize(50);
 		t2.setTextColor(Color.BLACK);
 		
 		
-		Term t3 = new Term(this, 2, 1, '1');
+		Term t3 = new Term(this, 2, 1, '1', null);
 		t3.setTextSize(50);
 		t3.setTextColor(Color.BLACK);
 		
 		
-		Term t4 = new Term(this, -1, 1, 'x');
+		Term t4 = new Term(this, -1, 2, 'x', null);
 		t4.setTextSize(50);
 		t4.setTextColor(Color.BLACK);
+		
+		
 		
 		
 		LHS.add(t1);
@@ -127,19 +136,20 @@ public class SolveForX extends Activity {
 		
 	}
 	
-	public void addTerm(View v) {
+	public void addTerm(View v) {//to move a term
 		if (selectedTerm == null) {
 			Toast.makeText(this, "Select a term by tapping on it.", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		if (isTermLeft) {
+			status.setText("Moved a term.");
+		if (isTermLeft) {//move left to right
 			isTermLeft = false;	
 			selectedTerm.coeff = -1 * selectedTerm.coeff;
 			selectedTerm.setMyText();
 			LHS.remove(selectedTerm);
 			RHS.add(selectedTerm);
 		}
-		else {
+		else {//move right to left
 			isTermLeft = true;
 			selectedTerm.coeff = -1 * selectedTerm.coeff;
 			selectedTerm.setMyText();
@@ -150,42 +160,53 @@ public class SolveForX extends Activity {
 		checkForCorrect();
 	}
 	
-	public void selectCombine(View v) {
+	public void selectCombine(View v) {//combine was pressed
 		if (selectedTerm == null) {
 			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		Toast.makeText(this, "Select a term to combine with.", Toast.LENGTH_SHORT).show();
+		status.setText("Select a term to combine with.");
+		//Toast.makeText(this, "Select a term to combine with.", Toast.LENGTH_SHORT).show();
 		combinePressed = true;//combine was pressed, listen for click on term
 	}
 	
-	public void combineTerm(Term combineTerm, Boolean combineLeft) {
+	public void combineTerm(Term combineTerm, Boolean combineLeft) {//combine two selected terms
 		combinePressed = false;
 		if (combineLeft != isTermLeft) {//terms should be on same side to combine
-			Toast.makeText(this, "Move terms to the same side first.", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Move terms to the same side first.", Toast.LENGTH_SHORT).show();
+			status.setText("Move terms to the same side first.");
 			return;
 		}
-		if (selectedTerm.var != combineTerm.var) {//can't combine var and constant
-			Toast.makeText(this, "Can't combine these terms.", Toast.LENGTH_SHORT).show();
+		if (selectedTerm.var != combineTerm.var ||
+				selectedTerm.var == '(' ||
+				combineTerm.var == '(') {//can't combine var and constant or parenTerm
+			//Toast.makeText(this, "Can't combine these terms.", Toast.LENGTH_SHORT).show();
+			status.setText("Can't combine these terms.");
 			return;
 		}
+		if (selectedTerm == combineTerm) {//tapped selectedTerm again after combine
+			status.setText("Did not combine two terms.");
+			return;
+		}
+		status.setText("Combined two like terms.");
 		selectedTerm.coeff = combineTerm.denom*selectedTerm.coeff + selectedTerm.denom*combineTerm.coeff;
-		selectedTerm.denom = selectedTerm.denom*combineTerm.denom;
+		selectedTerm.denom = selectedTerm.denom*combineTerm.denom;//common denominator
 		selectedTerm.reduce();
 		if (isTermLeft)
-			LHS.remove(combineTerm);
+			LHS.remove(combineTerm);//this was combined into selectedTerm
 		else
 			RHS.remove(combineTerm);
 		drawEqn();
 		checkForCorrect();
 	}
 	
-	public void divide(View v) {
+	public void divide(View v) {//divide both sides by the coeff of selectedTerm
 		if (selectedTerm == null){
 			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		int c = selectedTerm.coeff;
+		status.setText("Divided both sides by " + c + ".");
 		for (int i = 0; i < LHS.size(); i++) {
 			Term t = LHS.get(i);
 			t.denom = t.denom * c;
@@ -195,31 +216,126 @@ public class SolveForX extends Activity {
 			Term t = RHS.get(i);
 			t.denom = t.denom * c;
 			t.reduce();
+		}
+		if (selectedTerm.var == '(' && selectedTerm.coeff == 1 && selectedTerm.denom == 1)
+			selectedTerm = null;//a parenTerm was just cleared into new terms
+		for (int i = 0; i < LHS.size(); i++) {
+			Term t = LHS.get(i);
+			if (t.var == '(' && t.coeff == 1 && t.denom == 1) {//check for any parenTerms that were cleared
+				int pos = LHS.indexOf(t);
+				for (int j = 0; j < t.parenTerms.length; j++) {
+					t.parenTerms[j].setOnClickListener(myClicker);
+					LHS.add(pos + j, t.parenTerms[j]);//put new parenTerms in correct place
+				}
+				LHS.remove(t);
+			}
+		}
+		for (int i = 0; i < RHS.size(); i++) {
+			Term t = RHS.get(i);
+			if (t.var == '(' && t.coeff == 1 && t.denom == 1) {
+				int pos = RHS.indexOf(t);
+				for (int j = 0; j < t.parenTerms.length; j++) {
+					t.parenTerms[j].setOnClickListener(myClicker);
+					RHS.add(pos + j, t.parenTerms[j]);
+				}
+				RHS.remove(t);				
+			}
+			
 		}
 		drawEqn();
 		checkForCorrect();
 	}
 	
-	public void multiply(View v) {
+	public void multiply(View v) {//multiply both sides by the denom of selectedTerm
 		if (selectedTerm == null) {
 			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		int c = selectedTerm.denom;
+		status.setText("Multiplied both sides by " + c + ".");
 		if (c == 1)
 			return;
 		for (int i = 0; i < LHS.size(); i++) {
 			Term t = LHS.get(i);
 			t.coeff = t.coeff * c;
-			t.reduce();
+			t.reduce();				
 		}
 		for (int i = 0; i < RHS.size(); i++) {
 			Term t = RHS.get(i);
 			t.coeff = t.coeff * c;
 			t.reduce();
 		}
+		if (selectedTerm.var == '(' && selectedTerm.coeff == 1 && selectedTerm.denom == 1)
+			selectedTerm = null;//a parenTerm was cleared into new terms
+		for (int i = 0; i < LHS.size(); i++) {
+			Term t = LHS.get(i);
+			if (t.var == '(' && t.coeff == 1 && t.denom == 1) {//check for cleared parenTerms
+				int pos = LHS.indexOf(t);
+				for (int j = 0; j < t.parenTerms.length; j++) {
+					t.parenTerms[j].setOnClickListener(myClicker);
+					LHS.add(pos + j, t.parenTerms[j]);//put parenTerms in correct position
+				}
+				LHS.remove(t);				
+			}
+		}
+		for (int i = 0; i < RHS.size(); i++) {
+			Term t = RHS.get(i);
+			if (t.var == '(' && t.coeff == 1 && t.denom == 1) {
+				int pos = RHS.indexOf(t);
+				for (int j = 0; j < t.parenTerms.length; j++) {
+					t.parenTerms[j].setOnClickListener(myClicker);
+					RHS.add(pos + j, t.parenTerms[j]);
+				}
+				RHS.remove(t);				
+			}
+			
+		}
 		drawEqn();
 		checkForCorrect();
+	}
+	
+	public void distribute(View v) {//distribute the coeff of a parenTerm
+		if (selectedTerm == null) {
+			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (selectedTerm.var != '(') {
+			Toast.makeText(this, "Nothing to distribute.", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		status.setText("Distributed the " + selectedTerm.coeff + ".");
+		if (selectedTerm.denom != 1) {//is fraction, leave as a parenTerm
+			for (int i = 0; i < selectedTerm.parenTerms.length; i++) {
+				selectedTerm.parenTerms[i].coeff *= selectedTerm.coeff;
+				selectedTerm.parenTerms[i].setMyText();
+			}
+			selectedTerm.coeff = 1;
+			selectedTerm.setMyText();
+		}
+		else {//is not fraction, need to replace the parenTerm with the sub-terms
+			if (isTermLeft) {
+				int pos = LHS.indexOf(selectedTerm);
+				for (int i = 0; i < selectedTerm.parenTerms.length; i++) {
+					selectedTerm.parenTerms[i].coeff *= selectedTerm.coeff;
+					selectedTerm.parenTerms[i].setMyText();
+					selectedTerm.parenTerms[i].setOnClickListener(myClicker);
+					LHS.add(pos + i, selectedTerm.parenTerms[i]);
+				}
+				LHS.remove(selectedTerm);
+			}
+			else {
+				int pos = RHS.indexOf(selectedTerm);
+				for (int i = 0; i < selectedTerm.parenTerms.length; i++) {
+					selectedTerm.parenTerms[i].coeff *= selectedTerm.coeff;
+					selectedTerm.parenTerms[i].setMyText();
+					selectedTerm.parenTerms[i].setOnClickListener(myClicker);
+					RHS.add(pos + i, selectedTerm.parenTerms[i]);
+				}
+				RHS.remove(selectedTerm);
+			}
+			selectedTerm = null;
+		}
+		drawEqn();
 	}
 	
 	public void checkForCorrect() {
@@ -228,9 +344,11 @@ public class SolveForX extends Activity {
 		//one side should have a term which is 1x
 		//the other side should be just a constant
 		if (LHS.get(0).var == 'x' && LHS.get(0).coeff == 1 && LHS.get(0).denom == 1 && RHS.get(0).var == '1')
-			Toast.makeText(this, "You solved it!", Toast.LENGTH_SHORT).show();
+			status.setText("You solved it! Well done.");
+			//Toast.makeText(this, "You solved it!", Toast.LENGTH_SHORT).show();
 		if (RHS.get(0).var == 'x' && RHS.get(0).coeff == 1 && RHS.get(0).denom == 1 && LHS.get(0).var == '1')
-			Toast.makeText(this, "You solved it!", Toast.LENGTH_SHORT).show();
+			status.setText("You solved it! Well done.");
+			//Toast.makeText(this, "You solved it!", Toast.LENGTH_SHORT).show();
 	}
 	
 	

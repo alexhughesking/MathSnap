@@ -17,11 +17,12 @@ public class Term extends TextView {
 	String text;//will not include the sign
 	TextView sign;//+ or -
 
-	public Term(Context context, int c, int d, char v) {
+	public Term(Context context, int c, int d, char v, Term[] pt) {
 		super(context);
 		coeff = c;
 		denom = d;
 		var = v;
+		parenTerms = pt;
 		this.setTextSize(50);
 		sign = new TextView(context);
 		sign.setTextSize(this.getTextSize());
@@ -43,31 +44,53 @@ public class Term extends TextView {
 	}
 	
 	public void setMyText() {
-		text = "<tt>";
+		text = "<tt>";//monospacing
 		if (denom != 1) {
-			text = text + "<u>";
+			text = text + "<u>";//underlining aka fraction bar
 		}
 		if (var == '1') {
-			text = text + abs(coeff);
+			text = text + abs(coeff);//just a constant
 		}
 		else if (var == 'x') {
 			if (abs(coeff) == 1)
-				text = text + var;
+				text = text + var;//dont show 1x or -1x
 			else
-				text = text + abs(coeff) + var;
+				text = text + abs(coeff) + var;//for example 3x
+		}
+		else if (var == '(') {//parenTerm
+			if (abs(coeff) != 1)			
+				text = text + abs(coeff) + "(";//for example 3(x+1)
+			if (parenTerms[0].coeff < 0)
+				text = text + "-" + parenTerms[0].text;//for example -x
+			else
+				text = text + parenTerms[0].text;//for example 2x
+			for (int i = 1; i < parenTerms.length; i++) {
+				if (parenTerms[i].coeff < 0)
+					text = text + "-" + parenTerms[i].text;//add the rest of the terms
+				else
+					text = text + "+" + parenTerms[i].text;
+			}
+			if (abs(coeff) != 1) 
+				text = text + ")";//close parentheses if present
 		}
 		if (denom != 1) {
-			text = text + "<//u><br>" + denom;
+			text = text + "<//u><br>";//finish fraction bar, new line
+			if (var == '(') {
+				text = text + "&nbsp;";//add a space for (
+			if (abs(coeff) != 1)
+				text = text + "&nbsp;";//add a space for coeff
+			}			
+			text = text + denom;//put denominator
 		}
 		if (coeff < 0)
-			sign.setText(Html.fromHtml("<tt>-<//tt>"));
+			sign.setText(Html.fromHtml("<tt>-<//tt>"));//monospaced sign
 		else
-			sign.setText(Html.fromHtml("<tt>+<//tt>"));
-		super.setText(Html.fromHtml("<//tt>" + text));
+			sign.setText(Html.fromHtml("<tt>+<//tt>"));//monospaced sign
+		super.setText(Html.fromHtml("<//tt>" + text));//end monospacing
 	}
 	
 	public void reduce() {
-		if (denom < 0) {
+		if (denom < 0) {//denom should always be considered positive
 			denom = denom * -1;
 			coeff = coeff * -1;
 		}
