@@ -132,6 +132,37 @@
                 android:src="@drawable/lb" />
             
 		</TableRow>
+		
+        <TableRow 
+            android:id="@+id/graphRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip" >"
+            
+            <ImageView
+                android:id="@+id/graphImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lb" 
+                />
+
+            <TextView
+                android:id="@+id/mainGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Graph Testing" 
+                android:gravity="center"
+                android:background="#FF6B6B"
+                android:clickable="true"
+                android:onClick="startProblemSelect" />"
+
+            <ImageView
+                android:id="@+id/graphProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/progress0" />
+ 
+        </TableRow>
     </TableLayout>
 </ScrollView>
 

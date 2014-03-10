@@ -38,6 +38,10 @@
             android:name="uf.seniorproj.alexryan.ProblemSelect"
             android:label="@string/title_activity_problem_select" >
         </activity>
+        <activity
+            android:name="uf.seniorproj.alexryan.GraphActivity"
+            android:label="@string/title_activity_graph" >
+        </activity>
     </application>
 
 </manifest>

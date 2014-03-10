@@ -16,5 +16,6 @@
     <string name="xSquared">x&lt;sup&gt;2&lt;/sup&gt; + </string>
     <string name="title_activity_solve_for_x">SolveForX</string>
     <string name="title_activity_problem_select">ProblemSelect</string>
+    <string name="title_activity_graph">GraphActivity</string>
 
 </resources>
