@@ -36,6 +36,10 @@ public class ProblemSelect extends Activity {
 			currActivity.setText("Solve for x");
 			colorString = "#C44D58";
 			break;
+		case R.id.mainGraph:
+			currActivity.setText("Graphing");
+			colorString = "#C44D58";
+			break;
 		}
 		
 		currActivity.setBackgroundColor(Color.parseColor(colorString));
@@ -85,6 +89,11 @@ public class ProblemSelect extends Activity {
 		else if (id == R.id.mainSolveForX) {
 			intent = new Intent(this, SolveForX.class);
 			intent.putExtra("probNum", probNum);	
+			startActivity(intent);
+		}
+		else if (id == R.id.mainGraph){
+			intent = new Intent(this, GraphActivity.class);
+			intent.putExtra("probNum", probNum);
 			startActivity(intent);
 		}
 		
