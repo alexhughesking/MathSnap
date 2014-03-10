@@ -23,7 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" 
+            android:layout_weight="0" 
             android:stretchColumns="1">
 
             <Button
@@ -49,13 +49,7 @@
                 android:onClick="hint2"/>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/blankSpace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_weight="1"/>
-
+        
         <RadioGroup 
             android:id="@+id/radioGroup1" 
             android:layout_width="wrap_content" 
@@ -95,17 +89,11 @@
 	            android:onClick="checkAns"/>
         
         </RadioGroup>
-        
-        <TextView
-            android:id="@+id/blankSpace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" 
+            android:layout_weight="0" 
             android:stretchColumns="1">
 
             <Button
