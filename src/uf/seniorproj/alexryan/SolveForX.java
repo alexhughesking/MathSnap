@@ -1,19 +1,18 @@
 package uf.seniorproj.alexryan;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
 
 public class SolveForX extends Activity {
 	
@@ -26,6 +25,13 @@ public class SolveForX extends Activity {
 	TextView status;//displays the last operation performed
 	TextView t0;//"="
 	TextView tz;//"0"
+	Button moveTermButton, divideByButton,
+			multiplyByButton, combineWithButton,
+			distributeButton;//the buttons that may be visible or invisible
+	int probNum;
+	SharedPreferences sPref;//used for saving problem completion state
+	SharedPreferences.Editor sPrefEdit;
+	TextView probNumView;//the problem number in the corner
 	
 
 	@Override
@@ -33,8 +39,22 @@ public class SolveForX extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_solve_for_x);
 		
+		sPref = getSharedPreferences("shared_preferences", MODE_PRIVATE);
+		sPrefEdit = sPref.edit();
+		
+		Bundle extras = getIntent().getExtras();
+		probNum = extras.getInt("probNum");//get the problem number that was clicked
+		
 		eqn = (LinearLayout)findViewById(R.id.solveXEqn);
 		status = (TextView)findViewById(R.id.solveXStatus);
+		probNumView = (TextView)findViewById(R.id.solveXProbNum);
+		
+		
+		moveTermButton = (Button) findViewById(R.id.solveXMoveTermButton);
+		multiplyByButton = (Button) findViewById(R.id.solveXMultiplyButton);
+		divideByButton = (Button) findViewById(R.id.solveXDivideButton);
+		combineWithButton = (Button) findViewById(R.id.solveXCombineButton);
+		distributeButton = (Button) findViewById(R.id.solveXDistributeButton);
 		
 		combinePressed = false;
 
@@ -73,6 +93,7 @@ public class SolveForX extends Activity {
 						isTermLeft = false;
 					}
 				}
+				displayButtons();
 				}
 				
 			}			
@@ -128,12 +149,76 @@ public class SolveForX extends Activity {
 		t3.setOnClickListener(myClicker);
 		t4.setOnClickListener(myClicker);
 		
-
-		
+		loadActivity();
+	}
+	
+	public void loadActivity() {
+		probNumView.setText((probNum + 1) + ")");
 		drawEqn();
-		
-		
-		
+	}
+	
+	public void displayButtons() {
+		if (selectedTerm == null) {
+			moveTermButton.setAlpha(0.5f);
+			multiplyByButton.setAlpha(0.5f);
+			divideByButton.setAlpha(0.5f);
+			combineWithButton.setAlpha(0.5f);
+			distributeButton.setAlpha(0.5f);
+			multiplyByButton.setText("Multiply");
+			divideByButton.setText("Divide");
+			distributeButton.setText("Distribute");
+			moveTermButton.setClickable(false);
+			multiplyByButton.setClickable(false);
+			divideByButton.setClickable(false);
+			combineWithButton.setClickable(false);
+			distributeButton.setClickable(false);
+		}
+		else{
+			multiplyByButton.setText("Multiply by " + selectedTerm.denom);
+			divideByButton.setText("Divide by " + selectedTerm.coeff);
+			moveTermButton.setAlpha(1.0f);//term can always be moved
+			moveTermButton.setClickable(true);
+			//don't show multiply if denom is 1
+			if (selectedTerm.denom == 1) {
+				multiplyByButton.setAlpha(0.5f);
+				multiplyByButton.setClickable(false);
+			}
+			else {
+				multiplyByButton.setAlpha(1.0f);
+				multiplyByButton.setClickable(true);
+			}
+			//don't show divide if coeff is 1
+			if(selectedTerm.coeff == 1) {
+				divideByButton.setAlpha(0.5f);
+				divideByButton.setClickable(false);
+			}
+			else {
+				divideByButton.setAlpha(1.0f);
+				divideByButton.setClickable(true);
+			}
+			if (selectedTerm.var == '(') {//parenthetical term
+				if (selectedTerm.coeff != 1) {
+					distributeButton.setAlpha(1.0f);//something to distribute
+					distributeButton.setClickable(true);
+					distributeButton.setText("Distribute the " + selectedTerm.coeff);
+				}
+				else {
+					distributeButton.setAlpha(0.5f);//nothing to distribute
+					distributeButton.setClickable(false);
+					distributeButton.setText("Distribute");
+				}
+				combineWithButton.setAlpha(0.5f);//can't combine parenterms
+				combineWithButton.setClickable(false);
+			}
+			else {//not a parenthetical term
+				distributeButton.setAlpha(0.5f);//nothing to distribute
+				distributeButton.setClickable(false);
+				distributeButton.setText("Distribute");
+				combineWithButton.setAlpha(1.0f);//term can be combined
+				combineWithButton.setClickable(true);
+			}
+			
+		}
 	}
 	
 	public void addTerm(View v) {//to move a term
@@ -360,13 +445,8 @@ public class SolveForX extends Activity {
 			if (i == 0) {
 				if (t.coeff < 0)
 					eqn.addView(t.sign);
-//				else
-//					t.setText(Html.fromHtml("<tt>" + LHS.get(i).text + "<//tt>"));
 			}
-//			else if (t.coeff > 0)
-//				t.setText(Html.fromHtml("<tt>" + "+" + t.text + "<//tt>"));
 			else
-//				t.setText(Html.fromHtml("<tt>" + "-" + t.text + "<//tt>"));
 				eqn.addView(t.sign);
 			
 			eqn.addView(t);
@@ -380,21 +460,16 @@ public class SolveForX extends Activity {
 			Term t = RHS.get(i);
 			if (i == 0) {
 				if (t.coeff < 0)
-//					t.setText(Html.fromHtml("<tt>" + "-" + t.text + "<//tt>"));
 					eqn.addView(t.sign);
-//				else
-//					t.setText(Html.fromHtml("<tt>" + t.text + "<//tt>"));
 			}
-//			else if (t.coeff > 0)
-//				t.setText(Html.fromHtml("<tt>" + "+" + t.text + "<//tt>"));
 			else
-//				t.setText(Html.fromHtml("<tt>" + "-" + t.text + "<//tt>"));
 				eqn.addView(t.sign);
 			
 			eqn.addView(t);
 		}
 		if(RHS.size() == 0)
 			eqn.addView(tz); //"0"
+		displayButtons();
 	}
 
 	@Override

@@ -59,7 +59,9 @@ public class Term extends TextView {
 		}
 		else if (var == '(') {//parenTerm
 			if (abs(coeff) != 1)			
-				text = text + abs(coeff) + "(";//for example 3(x+1)
+				text = text + abs(coeff) + "(";//for example 3(x+1)/2
+			else if (abs(coeff) == 1 && denom == 1)
+				text = text + "(";//for example -(x+1)
 			if (parenTerms[0].coeff < 0)
 				text = text + "-" + parenTerms[0].text;//for example -x
 			else
@@ -71,6 +73,8 @@ public class Term extends TextView {
 					text = text + "+" + parenTerms[i].text;
 			}
 			if (abs(coeff) != 1) 
+				text = text + ")";//close parentheses if present
+			else if (abs(coeff) == 1 && denom == 1)
 				text = text + ")";//close parentheses if present
 		}
 		if (denom != 1) {
