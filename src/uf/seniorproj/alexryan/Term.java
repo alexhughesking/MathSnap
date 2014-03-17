@@ -16,6 +16,7 @@ public class Term extends TextView {
 	Term numerator;
 	String text;//will not include the sign
 	TextView sign;//+ or -
+	static float textSize;//will be set based on size in layout
 
 	public Term(Context context, int c, int d, char v, Term[] pt) {
 		super(context);
@@ -23,9 +24,9 @@ public class Term extends TextView {
 		denom = d;
 		var = v;
 		parenTerms = pt;
-		this.setTextSize(50);
+		this.setTextSize(textSize);
 		sign = new TextView(context);
-		sign.setTextSize(this.getTextSize());
+		sign.setTextSize(textSize);
 		setMyText();
 	}
 	public Term(Context context) {
@@ -41,6 +42,25 @@ public class Term extends TextView {
 	public Term(Context context, AttributeSet attrs, int defStyle) {
 	    super(context, attrs, defStyle);
 
+	}
+	
+	public Term(Term org) {
+		super(org.getContext());
+		Term[] pt = null;
+		if (org.var == '(') {//parenTerm
+			pt = new Term[org.parenTerms.length];
+			for (int i = 0; i < org.parenTerms.length; i++) {
+				pt[i] = new Term(org.parenTerms[i]);//copy each parenTerm
+			}
+		}
+		coeff = org.coeff;
+		denom = org.denom;
+		var = org.var;
+		parenTerms = pt;
+		this.setTextSize(textSize);
+		sign = new TextView(org.getContext());
+		sign.setTextSize(textSize);
+		setMyText();
 	}
 	
 	public void setMyText() {

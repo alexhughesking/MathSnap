@@ -17,6 +17,7 @@ import android.widget.Toast;
 public class SolveForX extends Activity {
 	
 	ArrayList<Term> LHS, RHS;
+	ArrayList<Term>[] LHSData, RHSData;
 	Term selectedTerm;
 	boolean isTermLeft;//which side it's on
 	boolean combinePressed;//next selected term should be combined
@@ -57,9 +58,9 @@ public class SolveForX extends Activity {
 		distributeButton = (Button) findViewById(R.id.solveXDistributeButton);
 		
 		combinePressed = false;
-
-		LHS = new ArrayList<Term>(5);
-		RHS = new ArrayList<Term>(5);
+		
+		LHS = new ArrayList<Term>(15);
+		RHS = new ArrayList<Term>(15);
 		
 		myClicker = new OnClickListener() {
 			@Override
@@ -99,14 +100,15 @@ public class SolveForX extends Activity {
 			}			
 		};
 		
+		Term.textSize = status.getTextSize();//set the appropriate text size for terms
 		t0 = new TextView(this);
 		t0.setText(" = ");
-		t0.setTextSize(50);
+		t0.setTextSize(status.getTextSize());
 		t0.setTextColor(Color.BLACK);	
 		
 		tz = new TextView(this);
 		tz.setText("0");
-		tz.setTextSize(50);
+		tz.setTextSize(status.getTextSize());
 		tz.setTextColor(Color.BLACK);
 		
 		Term test1 = new Term(this, 1, 1, 'x', null);
@@ -115,24 +117,24 @@ public class SolveForX extends Activity {
 		Term[] testPt = {test1, test2};
 		
 		Term t1 = new Term(this, 3, 2, '(', testPt);
-		t1.setTextSize(50);
-		t1.setTextColor(Color.BLACK);
+		//t1.setTextSize(50);
+		//t1.setTextColor(Color.BLACK);
 		
 		
 	
 		Term t2 = new Term(this, -1, 1, '1', null);
-		t2.setTextSize(50);
-		t2.setTextColor(Color.BLACK);
+		//t2.setTextSize(50);
+		//t2.setTextColor(Color.BLACK);
 		
 		
 		Term t3 = new Term(this, 2, 1, '1', null);
-		t3.setTextSize(50);
-		t3.setTextColor(Color.BLACK);
+		//t3.setTextSize(50);
+		//t3.setTextColor(Color.BLACK);
 		
 		
 		Term t4 = new Term(this, -1, 2, 'x', null);
-		t4.setTextSize(50);
-		t4.setTextColor(Color.BLACK);
+		//t4.setTextSize(50);
+		//t4.setTextColor(Color.BLACK);
 		
 		
 		
@@ -152,8 +154,16 @@ public class SolveForX extends Activity {
 		loadActivity();
 	}
 	
+	public void makeTerms() {
+		//make the terms for each problem
+		//add them to some problemData array
+	}
+	
 	public void loadActivity() {
 		probNumView.setText((probNum + 1) + ")");
+		status.setText("Select a term to begin.");
+		selectedTerm = null;
+		//copy the problemData into LHS and RHS
 		drawEqn();
 	}
 	
@@ -281,6 +291,13 @@ public class SolveForX extends Activity {
 			LHS.remove(combineTerm);//this was combined into selectedTerm
 		else
 			RHS.remove(combineTerm);
+		if (selectedTerm.coeff == 0) {
+			if (isTermLeft)
+				LHS.remove(selectedTerm);
+			else
+				RHS.remove(selectedTerm);
+			selectedTerm = null;
+		}
 		drawEqn();
 		checkForCorrect();
 	}
