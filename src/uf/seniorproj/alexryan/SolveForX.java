@@ -17,10 +17,11 @@ import android.widget.Toast;
 public class SolveForX extends Activity {
 	
 	ArrayList<Term> LHS, RHS;
-	ArrayList<Term>[] LHSData, RHSData;
+	ArrayList<ArrayList<Term>> LHSList, RHSList;//store state of problem after each step
+	ArrayList<ArrayList<Term>> problemsLHS, problemsRHS;//the initial state for each problem
 	Term selectedTerm;
-	boolean isTermLeft;//which side it's on
-	boolean combinePressed;//next selected term should be combined
+	boolean isTermLeft;//which side selectedTerm is on
+	boolean combinePressed;//next selected term should combine with selectedTerm
 	LinearLayout eqn;//the equation which contains LHS and RHS
 	OnClickListener myClicker;//to select term and change color
 	TextView status;//displays the last operation performed
@@ -59,8 +60,7 @@ public class SolveForX extends Activity {
 		
 		combinePressed = false;
 		
-		LHS = new ArrayList<Term>(15);
-		RHS = new ArrayList<Term>(15);
+
 		
 		myClicker = new OnClickListener() {
 			@Override
@@ -100,6 +100,17 @@ public class SolveForX extends Activity {
 			}			
 		};
 		
+		makeTerms();//set up the terms for each problem
+
+		
+		loadActivity();
+	}
+	
+	public void makeTerms() {
+		//make the terms for each problem
+		//add them to problemLHS, problemRHS
+		problemsLHS = new ArrayList<ArrayList<Term>>(10);
+		problemsRHS = new ArrayList<ArrayList<Term>>(10);
 		Term.textSize = status.getTextSize();//set the appropriate text size for terms
 		t0 = new TextView(this);
 		t0.setText(" = ");
@@ -111,59 +122,199 @@ public class SolveForX extends Activity {
 		tz.setTextSize(status.getTextSize());
 		tz.setTextColor(Color.BLACK);
 		
-		Term test1 = new Term(this, 1, 1, 'x', null);
-		Term test2 = new Term(this, -2, 1, '1', null);
+		Term p1t1 = new Term(this, 2, 1, 'x', null);
+		Term p1t2 = new Term(this, -3, 1, '1', null);
+		Term p1t3 = new Term(this, 1, 1, 'x', null);
+		Term p1t4 = new Term(this, 2, 1, '1', null);
+		ArrayList<Term> prob1LHS = new ArrayList<Term>();
+		ArrayList<Term> prob1RHS = new ArrayList<Term>();
+		prob1LHS.add(p1t1);
+		prob1LHS.add(p1t2);
+		prob1RHS.add(p1t3);
+		prob1RHS.add(p1t4);		
+		problemsLHS.add(prob1LHS);
+		problemsRHS.add(prob1RHS);
 		
-		Term[] testPt = {test1, test2};
+		Term p2t1 = new Term(this, -5, 1, '1', null);
+		Term p2t2 = new Term(this, 3, 1, 'x', null);
+		Term p2t3 = new Term(this, 1, 1, 'x', null);
+		Term p2t4 = new Term(this, -1, 1, '1', null);
+		ArrayList<Term> prob2LHS = new ArrayList<Term>();
+		ArrayList<Term> prob2RHS = new ArrayList<Term>();
+		prob2LHS.add(p2t1);
+		prob2LHS.add(p2t2);
+		prob2RHS.add(p2t3);
+		prob2RHS.add(p2t4);
+		problemsLHS.add(prob2LHS);
+		problemsRHS.add(prob2RHS);
 		
-		Term t1 = new Term(this, 3, 2, '(', testPt);
-		//t1.setTextSize(50);
-		//t1.setTextColor(Color.BLACK);
+		Term p3t1 = new Term(this, 1, 1, 'x', null);
+		Term p3t2 = new Term(this, 1, 3, 'x', null);
+		Term p3t3 = new Term(this, -6, 1, '1', null);
+		ArrayList<Term> prob3LHS = new ArrayList<Term>();
+		ArrayList<Term> prob3RHS = new ArrayList<Term>();
+		prob3LHS.add(p3t1);
+		prob3RHS.add(p3t2);
+		prob3RHS.add(p3t3);
+		problemsLHS.add(prob3LHS);
+		problemsRHS.add(prob3RHS);
+		
+		Term p4inner1 = new Term(this, 2, 1, 'x', null);
+		Term p4inner2 = new Term(this, -1, 1, '1', null);
+		Term[] p4paren1 = {p4inner1, p4inner2};
+		Term p4t1 = new Term(this, 3, 1, '(', p4paren1);
+		Term p4t2 = new Term(this, 2, 1, 'x', null);
+		Term p4t3 = new Term(this, 1, 1, '1', null);
+		ArrayList<Term> prob4LHS = new ArrayList<Term>();
+		ArrayList<Term> prob4RHS = new ArrayList<Term>();
+		prob4LHS.add(p4t1);
+		prob4RHS.add(p4t2);
+		prob4RHS.add(p4t3);
+		problemsLHS.add(prob4LHS);
+		problemsRHS.add(prob4RHS);
+		
+		Term p5t1 = new Term(this, -1, 1, 'x', null);
+		Term p5inner1 = new Term(this, 1, 1, 'x', null);
+		Term p5inner2 = new Term(this, 1, 1, '1', null);
+		Term[] p5paren1 = {p5inner1, p5inner2};
+		Term p5t2 = new Term(this, -2, 1, '(', p5paren1);
+		Term p5t3 = new Term(this, 3, 1, '1', null);
+		Term p5inner3 = new Term(this, 2, 1, '1', null);
+		Term p5inner4 = new Term(this, 1, 1, 'x', null);
+		Term[] p5paren2 = {p5inner3, p5inner4};
+		Term p5t4 = new Term(this, -2, 1, '(', p5paren2);
+		ArrayList<Term> prob5LHS = new ArrayList<Term>();
+		ArrayList<Term> prob5RHS = new ArrayList<Term>();
+		prob5LHS.add(p5t1);
+		prob5LHS.add(p5t2);
+		prob5RHS.add(p5t3);
+		prob5RHS.add(p5t4);
+		problemsLHS.add(prob5LHS);
+		problemsRHS.add(prob5RHS);
 		
 		
-	
-		Term t2 = new Term(this, -1, 1, '1', null);
-		//t2.setTextSize(50);
-		//t2.setTextColor(Color.BLACK);
+		
+		Term p6inner1 = new Term(this, 1, 1, 'x', null);
+		Term p6inner2 = new Term(this, -2, 1, '1', null);		
+		Term[] p6paren1 = {p6inner1, p6inner2};		
+		Term p6t1 = new Term(this, 3, 2, '(', p6paren1);	
+		Term p6t2 = new Term(this, -1, 1, '1', null);	
+		Term p6t3 = new Term(this, 2, 1, '1', null);	
+		Term p6t4 = new Term(this, -1, 2, 'x', null);
+		
+		ArrayList<Term> prob6LHS = new ArrayList<Term>();
+		ArrayList<Term> prob6RHS = new ArrayList<Term>();
+		prob6LHS.add(p6t1);
+		prob6LHS.add(p6t2);
+		prob6RHS.add(p6t3);
+		prob6RHS.add(p6t4);
+		
+		problemsLHS.add(prob6LHS);
+		problemsRHS.add(prob6RHS);
 		
 		
-		Term t3 = new Term(this, 2, 1, '1', null);
-		//t3.setTextSize(50);
-		//t3.setTextColor(Color.BLACK);
+		Term p7inner1 = new Term(this, 1, 1, 'x', null);
+		Term p7inner2 = new Term(this, -1, 1, '1', null);
+		Term[] p7paren1 = {p7inner1, p7inner2};
+		Term p7t1 = new Term(this, 1, 6, '(', p7paren1);
+		Term p7inner3 = new Term(this, 2, 1, 'x', null);
+		Term p7inner4 = new Term(this, 1, 1, '1', null);
+		Term[] p7paren2 = {p7inner3, p7inner4};
+		Term p7t2 = new Term(this, 1, 3, '(', p7paren2);
+		Term p7t3 = new Term(this, -1, 2, '1', null);
+		ArrayList<Term> prob7LHS = new ArrayList<Term>();
+		ArrayList<Term> prob7RHS = new ArrayList<Term>();
+		prob7LHS.add(p7t1);
+		prob7RHS.add(p7t2);
+		prob7RHS.add(p7t3);
+		problemsLHS.add(prob7LHS);
+		problemsRHS.add(prob7RHS);
 		
+		Term p8t1 = new Term(this, 1, 1, 'x', null);
+		Term p8inner1 = new Term(this, 1, 1, 'x', null);
+		Term p8inner2 = new Term(this, 1, 1, '1', null);
+		Term[] p8paren1 = {p8inner1, p8inner2};
+		Term p8t2 = new Term(this, -1, 1, '(', p8paren1);
+		Term p8t3 = new Term(this, 2, 1, 'x', null);
+		Term p8inner3 = new Term(this, 1, 1, 'x', null);
+		Term p8inner4 = new Term(this, 2, 1, '1', null);
+		Term[] p8paren2 = {p8inner3, p8inner4};
+		Term p8t4 = new Term(this, -1, 1, '(', p8paren2);
+		Term p8t5 = new Term(this, -3, 1, '1', null);
+		ArrayList<Term> prob8LHS = new ArrayList<Term>();
+		ArrayList<Term> prob8RHS = new ArrayList<Term>();
+		prob8LHS.add(p8t1);
+		prob8LHS.add(p8t2);
+		prob8RHS.add(p8t3);
+		prob8RHS.add(p8t4);
+		prob8RHS.add(p8t5);
+		problemsLHS.add(prob8LHS);
+		problemsRHS.add(prob8RHS);
 		
-		Term t4 = new Term(this, -1, 2, 'x', null);
-		//t4.setTextSize(50);
-		//t4.setTextColor(Color.BLACK);
+		Term p9t1 = new Term(this, 5, 1, '1', null);
+		Term p9inner1 = new Term(this, 2, 1, 'x', null);
+		Term p9inner2 = new Term(this, 1, 1, '1', null);
+		Term[] p9paren1 = {p9inner1, p9inner2};
+		Term p9t2 = new Term(this, 3, 1, '(', p9paren1);
+		Term p9inner3 = new Term(this, 1, 1, '1', null);
+		Term p9inner4 = new Term(this, -1, 1, 'x', null);
+		Term[] p9paren2 = {p9inner3, p9inner4};
+		Term p9t3 = new Term(this, -2, 1, '(', p9paren2);
+		Term p9t4 = new Term(this, 4, 1, 'x', null);
+		Term p9t5 = new Term(this, -2, 1, '1', null);
+		ArrayList<Term> prob9LHS = new ArrayList<Term>();
+		ArrayList<Term> prob9RHS = new ArrayList<Term>();
+		prob9LHS.add(p9t1);
+		prob9LHS.add(p9t2);
+		prob9LHS.add(p9t3);
+		prob9RHS.add(p9t4);
+		prob9RHS.add(p9t5);
+		problemsLHS.add(prob9LHS);
+		problemsRHS.add(prob9RHS);
 		
-		
-		
-		
-		LHS.add(t1);
-		LHS.add(t2);
-		RHS.add(t3);
-		RHS.add(t4);
-
-		
-		
-		t1.setOnClickListener(myClicker);
-		t2.setOnClickListener(myClicker);
-		t3.setOnClickListener(myClicker);
-		t4.setOnClickListener(myClicker);
-		
-		loadActivity();
-	}
-	
-	public void makeTerms() {
-		//make the terms for each problem
-		//add them to some problemData array
+		Term p10inner1 = new Term(this, 2, 1, 'x', null);
+		Term p10inner2 = new Term(this, -4, 1, '1', null);
+		Term[] p10paren1 = {p10inner1, p10inner2};
+		Term p10t1 = new Term(this, 1, 5, '(', p10paren1);
+		Term p10t2 = new Term(this, 1, 1, 'x', null);
+		Term p10inner3 = new Term(this, 1, 1, '1', null);
+		Term p10inner4 = new Term(this, 1, 1, 'x', null);
+		Term[] p10paren2 = {p10inner3, p10inner4};
+		Term p10t3 = new Term(this, 3, 8, '(', p10paren2);
+		Term p10t4 = new Term(this, 1, 1, 'x', null);
+		Term p10t5 = new Term(this, -1, 1, '1', null);
+		ArrayList<Term> prob10LHS = new ArrayList<Term>();
+		ArrayList<Term> prob10RHS = new ArrayList<Term>();
+		prob10LHS.add(p10t1);
+		prob10LHS.add(p10t2);
+		prob10RHS.add(p10t3);
+		prob10RHS.add(p10t4);
+		prob10RHS.add(p10t5);
+		problemsLHS.add(prob10LHS);
+		problemsRHS.add(prob10RHS);
 	}
 	
 	public void loadActivity() {
 		probNumView.setText((probNum + 1) + ")");
 		status.setText("Select a term to begin.");
 		selectedTerm = null;
-		//copy the problemData into LHS and RHS
+		//copy the problemsLHS and problemsRHS into LHS and RHS
+		LHS = new ArrayList<Term>(15);
+		RHS = new ArrayList<Term>(15);
+		ArrayList<Term> probLHS = problemsLHS.get(probNum);//the data for current prob's LHS
+		ArrayList<Term> probRHS = problemsRHS.get(probNum);//the data for current prob's RHS
+		LHSList = new ArrayList<ArrayList<Term>>(30);
+		RHSList = new ArrayList<ArrayList<Term>>(30);
+		for (int i = 0; i < probLHS.size(); i++) {
+			Term t = new Term(probLHS.get(i));//copy terms from the problem
+			t.setOnClickListener(myClicker);
+			LHS.add(t);//insert copied term into current problem
+		}
+		for (int i = 0; i < probRHS.size(); i ++) {
+			Term t = new Term(probRHS.get(i));
+			t.setOnClickListener(myClicker);
+			RHS.add(t);
+		}		
 		drawEqn();
 	}
 	
@@ -441,16 +592,25 @@ public class SolveForX extends Activity {
 	}
 	
 	public void checkForCorrect() {
-		if (LHS.size() != 1 || RHS.size() != 1)
+		if (LHS.size() > 1 || RHS.size() > 1)
 			return;//not done yet
-		//one side should have a term which is 1x
+		
+		//explicit check for x = 0 or 0 = x
+		else if (LHS.size() == 0) {//0 on the LHS, RHS should not also be empty
+			if (RHS.get(0).var == 'x' && RHS.get(0).coeff == 1 && RHS.get(0).denom == 1)
+				status.setText("You solved it! Well done.");
+		}
+		else if (RHS.size() == 0) {//0 on RHS, LHS should not also be empty
+			if (LHS.get(0).var == 'x' && LHS.get(0).coeff == 1 && LHS.get(0).denom == 1)
+				status.setText("You solved it! Well done.");
+		}
+		
+		//usually, one side should have a term which is 1x
 		//the other side should be just a constant
-		if (LHS.get(0).var == 'x' && LHS.get(0).coeff == 1 && LHS.get(0).denom == 1 && RHS.get(0).var == '1')
+		else if (LHS.get(0).var == 'x' && LHS.get(0).coeff == 1 && LHS.get(0).denom == 1 && RHS.get(0).var == '1')
 			status.setText("You solved it! Well done.");
-			//Toast.makeText(this, "You solved it!", Toast.LENGTH_SHORT).show();
-		if (RHS.get(0).var == 'x' && RHS.get(0).coeff == 1 && RHS.get(0).denom == 1 && LHS.get(0).var == '1')
+		else if (RHS.get(0).var == 'x' && RHS.get(0).coeff == 1 && RHS.get(0).denom == 1 && LHS.get(0).var == '1')
 			status.setText("You solved it! Well done.");
-			//Toast.makeText(this, "You solved it!", Toast.LENGTH_SHORT).show();
 	}
 	
 	
