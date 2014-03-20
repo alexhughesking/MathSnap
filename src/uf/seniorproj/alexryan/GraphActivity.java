@@ -1,13 +1,9 @@
 package uf.seniorproj.alexryan;
 
 import processing.core.PApplet;
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
 
 public class GraphActivity extends PApplet {
-	
-	
+
 	int value;
 	
 	public void setup(){
@@ -17,24 +13,14 @@ public class GraphActivity extends PApplet {
 	}
 
 	public void draw() {
-//	  fill(value);
-//	  rect(displayWidth/2, displayHeight/2, 300, 300);
+
 	}
 	
 	public void makeGraph(){
-		if(displayWidth > displayHeight){
-			for (int i =0; i<=displayWidth; i+=displayHeight/10){
-				line(i,0,i,displayHeight);
-				line(0,i,displayWidth,i);
-			}
+		for (int i =0; i<=displayWidth; i+=displayHeight/10){
+			line(i,0,i,displayHeight);
+			line(0,i,displayWidth,i);
 		}
-		else{
-			for (int i =0; i<=displayHeight; i+=displayWidth/10){
-				line(i,0,i,displayWidth);
-				line(0,i,displayHeight,i);
-			}
-		}
-		
 	}
 	
 	public void mousePressed() {
