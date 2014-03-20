@@ -1,8 +1,6 @@
 package uf.seniorproj.alexryan;
 
 import processing.core.PApplet;
-import android.os.Bundle;
-import android.view.Menu;
 
 public class GraphActivity extends PApplet {
 	
@@ -15,6 +13,7 @@ public class GraphActivity extends PApplet {
 		background(255,255,224);
 		makeGraph();
 	}
+
 
 	public void draw() {}
 	
