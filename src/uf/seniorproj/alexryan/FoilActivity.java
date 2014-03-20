@@ -1,6 +1,7 @@
 package uf.seniorproj.alexryan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
@@ -10,6 +11,7 @@ import android.view.View.OnFocusChangeListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -303,6 +305,10 @@ public class FoilActivity extends Activity {
 		box3.setText("");
 		box4.setText("");
 		}
+		InputMethodManager imm = (InputMethodManager)getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(box1.getWindowToken(), 0);//hide the keyboard
+		focusStealer.requestFocus();//remove focus from any boxes
 	}
 	
 	public void setAnswerText() {
