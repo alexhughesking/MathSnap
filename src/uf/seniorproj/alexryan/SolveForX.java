@@ -58,7 +58,6 @@ public class SolveForX extends Activity {
 		combineWithButton = (Button) findViewById(R.id.solveXCombineButton);
 		distributeButton = (Button) findViewById(R.id.solveXDistributeButton);
 		
-		combinePressed = false;
 		
 
 		
@@ -100,9 +99,7 @@ public class SolveForX extends Activity {
 			}			
 		};
 		
-		makeTerms();//set up the terms for each problem
-
-		
+		makeTerms();//set up the terms for each problem		
 		loadActivity();
 	}
 	
@@ -298,13 +295,14 @@ public class SolveForX extends Activity {
 		probNumView.setText((probNum + 1) + ")");
 		status.setText("Select a term to begin.");
 		selectedTerm = null;
+		combinePressed = false;
 		//copy the problemsLHS and problemsRHS into LHS and RHS
 		LHS = new ArrayList<Term>(15);
 		RHS = new ArrayList<Term>(15);
 		ArrayList<Term> probLHS = problemsLHS.get(probNum);//the data for current prob's LHS
 		ArrayList<Term> probRHS = problemsRHS.get(probNum);//the data for current prob's RHS
-		LHSList = new ArrayList<ArrayList<Term>>(30);
-		RHSList = new ArrayList<ArrayList<Term>>(30);
+		LHSList = new ArrayList<ArrayList<Term>>(30);//no steps taken yet
+		RHSList = new ArrayList<ArrayList<Term>>(30);//no steps taken yet
 		for (int i = 0; i < probLHS.size(); i++) {
 			Term t = new Term(probLHS.get(i));//copy terms from the problem
 			t.setOnClickListener(myClicker);
@@ -314,11 +312,57 @@ public class SolveForX extends Activity {
 			Term t = new Term(probRHS.get(i));
 			t.setOnClickListener(myClicker);
 			RHS.add(t);
-		}		
+		}
+		saveState();//store original problem for undo
+		drawEqn();
+	}
+	
+	public void saveState() {
+		ArrayList<Term> currLHS = new ArrayList<Term>(15);//current Terms on LHS
+		ArrayList<Term> currRHS = new ArrayList<Term>(15);//current Terms on RHS
+		
+		for (int i = 0; i < LHS.size(); i++) {
+			Term t = new Term(LHS.get(i));//copy LHS to be stored
+			currLHS.add(t);
+		}	
+		for (int i = 0; i < RHS.size(); i++) {
+			Term t = new Term(RHS.get(i));//copy RHS to be stored
+			currRHS.add(t);
+		}
+		
+		LHSList.add(currLHS);//store LHS at end of list
+		RHSList.add(currRHS);//store RHS at end of list
+	}
+	
+	public void undo(View v) {
+		if (LHSList.size() == 0) {
+			Toast.makeText(this, "Nothing to undo!", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		LHS = LHSList.remove(LHSList.size() - 1);//remove LHS from end of list
+		RHS = RHSList.remove(RHSList.size() - 1);//remove RHS from end of list
+		
+		for (int i = 0; i < LHS.size(); i++) {
+			LHS.get(i).setOnClickListener(myClicker);
+		}
+		for (int i = 0; i < RHS.size(); i++) {
+			RHS.get(i).setOnClickListener(myClicker);
+		}
+		selectedTerm = null;
+		combinePressed = false;
+		status.setText("Undid a step.");
 		drawEqn();
 	}
 	
 	public void displayButtons() {
+		if (LHSList.size() == 0) {//no steps taken yet
+			//setAlpha 0.5f for undo button
+			//setClickable false for undo button
+		}
+		else {
+			//setAlpha to 1 for undo
+			//setClickable true for undo
+		}
 		if (selectedTerm == null) {
 			moveTermButton.setAlpha(0.5f);
 			multiplyByButton.setAlpha(0.5f);
