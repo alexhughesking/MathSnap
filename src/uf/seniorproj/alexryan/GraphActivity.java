@@ -45,7 +45,7 @@ public class GraphActivity extends PApplet {
 
 	public void draw() {}
 	
-	public void makeGraph(){
+	public void makeGraph(){// assuming forced landscape mode
 		diff = displayWidth - displayHeight;
 			for (int i =0; i<=10; i++){
 				//vertical lines
