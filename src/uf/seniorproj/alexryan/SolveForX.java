@@ -29,7 +29,7 @@ public class SolveForX extends Activity {
 	TextView tz;//"0"
 	Button moveTermButton, divideByButton,
 			multiplyByButton, combineWithButton,
-			distributeButton;//the buttons that may be visible or invisible
+			distributeButton, undoButton;//the buttons that may be visible or invisible
 	int probNum;
 	SharedPreferences sPref;//used for saving problem completion state
 	SharedPreferences.Editor sPrefEdit;
@@ -57,6 +57,7 @@ public class SolveForX extends Activity {
 		divideByButton = (Button) findViewById(R.id.solveXDivideButton);
 		combineWithButton = (Button) findViewById(R.id.solveXCombineButton);
 		distributeButton = (Button) findViewById(R.id.solveXDistributeButton);
+		undoButton = (Button) findViewById(R.id.solveXUndoButton);
 		
 		
 
@@ -313,7 +314,7 @@ public class SolveForX extends Activity {
 			t.setOnClickListener(myClicker);
 			RHS.add(t);
 		}
-		saveState();//store original problem for undo
+		//saveState();
 		drawEqn();
 	}
 	
@@ -356,12 +357,12 @@ public class SolveForX extends Activity {
 	
 	public void displayButtons() {
 		if (LHSList.size() == 0) {//no steps taken yet
-			//setAlpha 0.5f for undo button
-			//setClickable false for undo button
+			undoButton.setAlpha(0.5f);//setAlpha 0.5f for undo button
+			undoButton.setClickable(false);//setClickable false for undo button
 		}
 		else {
-			//setAlpha to 1 for undo
-			//setClickable true for undo
+			undoButton.setAlpha(1.0f);//setAlpha to 1 for undo
+			undoButton.setClickable(true);//setClickable true for undo
 		}
 		if (selectedTerm == null) {
 			moveTermButton.setAlpha(0.5f);
@@ -431,7 +432,8 @@ public class SolveForX extends Activity {
 			Toast.makeText(this, "Select a term by tapping on it.", Toast.LENGTH_SHORT).show();
 			return;
 		}
-			status.setText("Moved a term.");
+		saveState();
+		status.setText("Moved a term.");
 		if (isTermLeft) {//move left to right
 			isTermLeft = false;	
 			selectedTerm.coeff = -1 * selectedTerm.coeff;
@@ -478,6 +480,7 @@ public class SolveForX extends Activity {
 			status.setText("Did not combine two terms.");
 			return;
 		}
+		saveState();
 		status.setText("Combined two like terms.");
 		selectedTerm.coeff = combineTerm.denom*selectedTerm.coeff + selectedTerm.denom*combineTerm.coeff;
 		selectedTerm.denom = selectedTerm.denom*combineTerm.denom;//common denominator
@@ -503,6 +506,7 @@ public class SolveForX extends Activity {
 			return;
 		}
 		int c = selectedTerm.coeff;
+		saveState();
 		status.setText("Divided both sides by " + c + ".");
 		for (int i = 0; i < LHS.size(); i++) {
 			Term t = LHS.get(i);
@@ -549,6 +553,7 @@ public class SolveForX extends Activity {
 			return;
 		}
 		int c = selectedTerm.denom;
+		saveState();
 		status.setText("Multiplied both sides by " + c + ".");
 		if (c == 1)
 			return;
@@ -600,6 +605,7 @@ public class SolveForX extends Activity {
 			Toast.makeText(this, "Nothing to distribute.", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		saveState();
 		status.setText("Distributed the " + selectedTerm.coeff + ".");
 		if (selectedTerm.denom != 1) {//is fraction, leave as a parenTerm
 			for (int i = 0; i < selectedTerm.parenTerms.length; i++) {

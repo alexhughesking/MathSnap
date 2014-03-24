@@ -98,6 +98,14 @@
         android:textColor="#000"
         android:textSize="50dp" />
 
-
+    <Button
+        android:id="@+id/solveXUndoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/solveXMultiplyButton"
+        android:layout_alignBottom="@+id/solveXMultiplyButton"
+        android:layout_toLeftOf="@+id/solveXMultiplyButton"
+        android:text="Undo"
+        android:onClick="undo" />
 
 </RelativeLayout>
