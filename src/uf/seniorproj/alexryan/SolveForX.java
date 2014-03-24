@@ -3,6 +3,8 @@ package uf.seniorproj.alexryan;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ public class SolveForX extends Activity {
 	SharedPreferences sPref;//used for saving problem completion state
 	SharedPreferences.Editor sPrefEdit;
 	TextView probNumView;//the problem number in the corner
+	Boolean correct;//false until the problem is solved
 	
 
 	@Override
@@ -297,6 +300,7 @@ public class SolveForX extends Activity {
 		status.setText("Select a term to begin.");
 		selectedTerm = null;
 		combinePressed = false;
+		correct = false;
 		//copy the problemsLHS and problemsRHS into LHS and RHS
 		LHS = new ArrayList<Term>(15);
 		RHS = new ArrayList<Term>(15);
@@ -352,6 +356,7 @@ public class SolveForX extends Activity {
 		selectedTerm = null;
 		combinePressed = false;
 		status.setText("Undid a step.");
+		correct = false;//if they undid after problem was solved
 		drawEqn();
 	}
 	
@@ -428,6 +433,7 @@ public class SolveForX extends Activity {
 	}
 	
 	public void addTerm(View v) {//to move a term
+		combinePressed = false;//user hit combine and changed their mind
 		if (selectedTerm == null) {
 			Toast.makeText(this, "Select a term by tapping on it.", Toast.LENGTH_SHORT).show();
 			return;
@@ -501,6 +507,7 @@ public class SolveForX extends Activity {
 	}
 	
 	public void divide(View v) {//divide both sides by the coeff of selectedTerm
+		combinePressed = false;//user hit combine and changed their mind
 		if (selectedTerm == null){
 			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
 			return;
@@ -548,6 +555,7 @@ public class SolveForX extends Activity {
 	}
 	
 	public void multiply(View v) {//multiply both sides by the denom of selectedTerm
+		combinePressed = false;//user hit combine and changed their mind
 		if (selectedTerm == null) {
 			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
 			return;
@@ -597,6 +605,7 @@ public class SolveForX extends Activity {
 	}
 	
 	public void distribute(View v) {//distribute the coeff of a parenTerm
+		combinePressed = false;//user hit combine and changed their mind
 		if (selectedTerm == null) {
 			Toast.makeText(this, "Select a term first.", Toast.LENGTH_SHORT).show();
 			return;
@@ -644,23 +653,90 @@ public class SolveForX extends Activity {
 	public void checkForCorrect() {
 		if (LHS.size() > 1 || RHS.size() > 1)
 			return;//not done yet
-		
 		//explicit check for x = 0 or 0 = x
 		else if (LHS.size() == 0) {//0 on the LHS, RHS should not also be empty
 			if (RHS.get(0).var == 'x' && RHS.get(0).coeff == 1 && RHS.get(0).denom == 1)
-				status.setText("You solved it! Well done.");
+				correct = true;
 		}
 		else if (RHS.size() == 0) {//0 on RHS, LHS should not also be empty
 			if (LHS.get(0).var == 'x' && LHS.get(0).coeff == 1 && LHS.get(0).denom == 1)
-				status.setText("You solved it! Well done.");
-		}
-		
+				correct = true;
+		}		
 		//usually, one side should have a term which is 1x
 		//the other side should be just a constant
 		else if (LHS.get(0).var == 'x' && LHS.get(0).coeff == 1 && LHS.get(0).denom == 1 && RHS.get(0).var == '1')
-			status.setText("You solved it! Well done.");
+			correct = true;
 		else if (RHS.get(0).var == 'x' && RHS.get(0).coeff == 1 && RHS.get(0).denom == 1 && LHS.get(0).var == '1')
-			status.setText("You solved it! Well done.");
+			correct = true;
+		
+		if (correct) {
+		status.setText("You solved it! Well done.");
+		sPrefEdit.putString("solveX"+String.valueOf(probNum), "true");
+		sPrefEdit.commit();
+		if (selectedTerm != null) {
+			selectedTerm.setTextColor(Color.BLACK);//remove highlight
+			selectedTerm = null;
+		}
+		for (int i = 0; i < LHS.size(); i++) {
+			LHS.get(i).setClickable(false);//don't let them click terms anymore
+		}
+		for (int i = 0; i < RHS.size(); i++) {
+			RHS.get(i).setClickable(false);
+		}
+		displayButtons();//grey out all but undo
+		}
+	}
+	
+	public void prevProb(View v) {
+		if (probNum == 0)
+			Toast.makeText(this, "Cannot go back any further.", Toast.LENGTH_SHORT).show();
+		else if (LHSList.size() > 0 && !correct) {//they have made move but not done
+			new AlertDialog.Builder(this)
+	        .setTitle("Leaving current problem")
+	        .setMessage("Move on to the previous problem?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int which) { 
+	            	probNum--;
+	            	loadActivity();
+	            }
+	         })
+	        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int which) { 
+	                // do nothing
+	            }
+	         })
+	         .show();
+		}
+		else {
+			probNum--;
+			loadActivity();
+		}
+	}
+	
+	public void nextProb(View v) {
+		if (probNum == 9)
+			Toast.makeText(this, "No more problems remain.", Toast.LENGTH_SHORT).show();
+		else if (LHSList.size() > 0 && !correct) {//they have made a move but not done
+			new AlertDialog.Builder(this)
+	        .setTitle("Leaving current problem")
+	        .setMessage("Move on to the next problem?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int which) { 
+	            	probNum++;
+	            	loadActivity();
+	            }
+	         })
+	        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int which) { 
+	                // do nothing
+	            }
+	         })
+	         .show();
+		}
+		else {
+			probNum++;
+			loadActivity();
+		}
 	}
 	
 	

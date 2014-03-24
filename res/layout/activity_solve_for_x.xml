@@ -108,4 +108,24 @@
         android:text="Undo"
         android:onClick="undo" />
 
+    <Button
+        android:id="@+id/solveXPrevProb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/solveXCombineButton"
+        android:layout_alignBottom="@+id/solveXCombineButton"
+        android:layout_alignParentLeft="true"
+        android:text="Previous"
+        android:onClick="prevProb" />
+
+    <Button
+        android:id="@+id/solveXNextProb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/solveXCombineButton"
+        android:layout_alignBottom="@+id/solveXCombineButton"
+        android:layout_alignParentRight="true"
+        android:text="    Next    "
+        android:onClick="nextProb" />
+
 </RelativeLayout>
