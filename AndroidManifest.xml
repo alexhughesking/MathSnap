@@ -14,9 +14,17 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Mytheme" >
         <activity
-            android:name="uf.seniorproj.alexryan.SplashScreen"
+            android:name="uf.seniorproj.alexryan.MainActivity"
             android:label="@string/app_name" 
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            >
+            
+            <!-- 
+            FOR SPLASH SCREEN:
+            change android:name to .SplashScreen AND
+            add android:theme="@android:style/Theme.Black.NoTitleBar" to activity section
+            look below for more instructions! :D
+            --> 
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,10 +51,15 @@
             android:name="uf.seniorproj.alexryan.GraphActivity"
             android:label="@string/title_activity_graph" >
         </activity>
+        
+        <!-- 
+        ADD THIS FOR SPLASH SCREEN
         <activity
             android:name="uf.seniorproj.alexryan.MainActivity"
             android:label="@string/app_name" >
         </activity>
+        -->
+    
     </application>
 
 </manifest>
