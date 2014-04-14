@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
         checkFoil();
         checkSolveX();
         checkPrime();
+        checkGraph();
     }
 
 
@@ -160,6 +161,7 @@ public class MainActivity extends Activity {
     	}
     }
     
+
     public void checkPrime() {
     	int pCount=0;
     	for(int i=0; i<=10; i++){
@@ -167,6 +169,39 @@ public class MainActivity extends Activity {
     			pCount++;
     	}
     	ImageView progress = (ImageView) findViewById(R.id.primeProgress);
+    	switch(pCount){
+		case(0):
+			progress.setImageResource(R.drawable.progress0); break;
+		case(1):
+			progress.setImageResource(R.drawable.progress1); break;
+		case(2):
+			progress.setImageResource(R.drawable.progress2); break;
+		case(3):
+			progress.setImageResource(R.drawable.progress3); break;
+		case(4):
+			progress.setImageResource(R.drawable.progress4); break;
+		case(5):
+			progress.setImageResource(R.drawable.progress5); break;
+		case(6):
+			progress.setImageResource(R.drawable.progress6); break;
+		case(7):
+			progress.setImageResource(R.drawable.progress7); break;
+		case(8):
+			progress.setImageResource(R.drawable.progress8); break;
+		case(9):
+			progress.setImageResource(R.drawable.progress9); break;
+		case(10):
+			progress.setImageResource(R.drawable.progress10); break;
+    	}
+    }
+
+    public void checkGraph(){
+    	int pCount=0;
+    	for(int i=0; i<=10; i++){
+    		if(sPref.getString("graph"+String.valueOf(i), "false").equals("true"))
+    			pCount++;
+    	}
+    	ImageView progress = (ImageView) findViewById(R.id.graphProgress);
     	switch(pCount){
     		case(0):
     			progress.setImageResource(R.drawable.progress0); break;
@@ -199,6 +234,7 @@ public class MainActivity extends Activity {
     	checkFoil();
     	checkSolveX();
     	checkPrime();
+    	checkGraph();
     }
 
 }
