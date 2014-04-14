@@ -25,7 +25,7 @@ public class ProblemSelect extends Activity {
 
 
 		TextView currActivity = (TextView)findViewById(R.id.probSelectText);//the label at the top
-		String colorString = "#FFF";//to set background color
+		String colorString = "#FFFFFF";//to set background color
 		switch (id) {
 		case R.id.mainFOIL: 
 			currActivity.setText("F.O.I.L");
@@ -41,6 +41,10 @@ public class ProblemSelect extends Activity {
 			break;
 		case R.id.mainGraph:
 			currActivity.setText("Graphing");
+			colorString = "#C44D58";
+			break;
+		case R.id.mainPrimeFactor:
+			currActivity.setText("Prime Factorization");
 			colorString = "#C44D58";
 			break;
 		}
@@ -99,6 +103,11 @@ public class ProblemSelect extends Activity {
 			intent.putExtra("probNum", probNum);
 			startActivity(intent);
 		}
+		else if(id == R.id.mainPrimeFactor) {
+			intent = new Intent(this, Prime.class);
+			intent.putExtra("probNum", probNum);
+			startActivity(intent);
+		}
 
 	}
 
@@ -140,6 +149,11 @@ public class ProblemSelect extends Activity {
 		case (R.id.mainGraph):
 			for (int i = 0; i < 10; i++) {
 				if (sPref.getString("graph"+String.valueOf(i), "false").equals("true"))
+					completedProb[i] = true;
+			}
+		case (R.id.mainPrimeFactor):
+			for (int i = 0; i < 10; i++) {
+				if (sPref.getString("prime"+String.valueOf(i), "false").equals("true"))
 					completedProb[i] = true;
 			}
 		}

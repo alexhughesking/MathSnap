@@ -12,6 +12,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +44,8 @@ public class FoilActivity extends Activity {
 	
 	AlphaAnimation fadeAnswer1, fadeAnswer2, fadeAnswer3;
 	AlphaAnimation fadeCorrect, fadeIncorrectIn, fadeIncorrectOut;
+	
+	Button prevButton, nextButton;
 	
 
 	@Override
@@ -82,6 +85,8 @@ public class FoilActivity extends Activity {
 		answer2 = (TextView) findViewById(R.id.foilDispAnswer2);
 		answer3 = (TextView) findViewById(R.id.foilDispAnswer3);
 		
+		prevButton = (Button) findViewById(R.id.foilPrev);
+		nextButton = (Button) findViewById(R.id.foilNext);
 		
 		loadProblem();
 		//setAnswerText();//setProblemText(0) first!
@@ -153,6 +158,10 @@ public class FoilActivity extends Activity {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				correctText.setVisibility(View.INVISIBLE);
+				prevButton.setAlpha(1.0f);
+				nextButton.setAlpha(1.0f);
+				prevButton.setClickable(true);
+				nextButton.setClickable(true);
 				
 			}
 
@@ -200,6 +209,31 @@ public class FoilActivity extends Activity {
 			public void onAnimationEnd(Animation animation) {
 				answer3.setVisibility(View.VISIBLE);
 				answer3.startAnimation(fadeAnswer3);
+				
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fadeAnswer3.setAnimationListener(new AnimationListener() {
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				prevButton.setAlpha(1.0f);
+				nextButton.setAlpha(1.0f);
+				prevButton.setClickable(true);
+				nextButton.setClickable(true);
 				
 			}
 
@@ -503,13 +537,19 @@ public class FoilActivity extends Activity {
 		String answer4 = box4.getText().toString();
 		
 		//a box is empty
-		if (answer1.equals("") ||
-			answer2.equals("") ||
-			answer3.equals("") ||
-			answer4.equals("")) {
-			Toast.makeText(this, "Please finish entering your answer.", Toast.LENGTH_SHORT).show();
-			return;
-		}
+//		if (answer1.equals("") ||
+//			answer2.equals("") ||
+//			answer3.equals("") ||
+//			answer4.equals("")) {
+//			Toast.makeText(this, "Please finish entering your answer.", Toast.LENGTH_SHORT).show();
+//			return;
+//		}
+		
+		//handle empty boxes by assuming values of 1 or 0
+		if (answer1.equals("")) answer1 = "1";//_x^2 = 1x^2
+		if (answer2.equals("")) answer2 = "1";//_x = 1x
+		if (answer3.equals("")) answer3 = "1";//_x = 1x
+		if (answer4.equals("")) answer4 = "0";//_ = 0
 		
 		int ans1, ans2, ans3, ans4;
 		//check for non-int answers
@@ -535,13 +575,20 @@ public class FoilActivity extends Activity {
 		else if (ans1 == a*c &&
 				 ans2 == b*c &&
 				 ans3 == a*d &&
-				 ans4 == b*d)
+				 ans4 == b*d) {
 			animateAnswer(true);
+			sPrefEdit.putString("foil"+String.valueOf(probNum), "true");
+			sPrefEdit.commit();
+		}
 		else
 			animateAnswer(false);
 	}
 	
 	public void animateAnswer(boolean correct) {
+		prevButton.setAlpha(0.5f);
+		nextButton.setAlpha(0.5f);
+		prevButton.setClickable(false);
+		nextButton.setClickable(false);
 		if (correct) {
 			correctText.setText("Correct! Well done.");
 			correctText.setVisibility(View.VISIBLE);

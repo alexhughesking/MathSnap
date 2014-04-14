@@ -9,11 +9,41 @@
         android:stretchColumns="1">
 	
         <TableRow 
-            android:id="@+id/foilRow"
+            android:id="@+id/primeRow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
-            android:layout_marginTop="10dip" >"
+            android:layout_marginTop="10dip" >
+            
+            <ImageView
+                android:id="@+id/clearProgImageL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lb" 
+                android:padding="0dip"/>
+
+            <TextView
+                android:id="@+id/mainPrimeFactor"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Prime Factorization" 
+                android:gravity="center"
+                android:background="#C44D58"
+                android:clickable="true"
+                android:onClick="startProblemSelect"/>
+
+            <ImageView
+                android:id="@+id/primeProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lb" />
+            
+		</TableRow>
+        <TableRow 
+            android:id="@+id/foilRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip" >"
             
             <ImageView
                 android:id="@+id/foilImage"
