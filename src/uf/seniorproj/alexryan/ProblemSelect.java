@@ -41,7 +41,7 @@ public class ProblemSelect extends Activity {
 			break;
 		case R.id.mainGraph:
 			currActivity.setText("Graphing");
-			colorString = "#C44D58";
+			colorString = "#FF6B6B";
 			break;
 		case R.id.mainPrimeFactor:
 			currActivity.setText("Prime Factorization");
@@ -151,6 +151,7 @@ public class ProblemSelect extends Activity {
 				if (sPref.getString("graph"+String.valueOf(i), "false").equals("true"))
 					completedProb[i] = true;
 			}
+		break;
 		case (R.id.mainPrimeFactor):
 			for (int i = 0; i < 10; i++) {
 				if (sPref.getString("prime"+String.valueOf(i), "false").equals("true"))
