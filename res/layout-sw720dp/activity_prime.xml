@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text=""
-        android:textSize="20dp" />
+        android:textSize="50dp" />
 
     <TextView
         android:id="@+id/primeProbNum"
@@ -25,7 +25,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text=""
-        android:textSize="26dp" />
+        android:textSize="50dp" />
 
     <LinearLayout
         android:id="@+id/primeLinearLayout"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Num = "
-            android:textSize="26dp" />
+            android:textSize="50dp" />
         
 		<EditText
             android:id="@+id/primeFactorBox1"
@@ -68,7 +68,7 @@
             android:imeOptions="actionNext"
             android:gravity="center"
             android:ems="2"
-            android:textSize="26dp" >
+            android:textSize="50dp" >
         </EditText>
         
 		 <TextView
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="x"
-            android:textSize="26dp" />
+            android:textSize="50dp" />
 		 
 		 <EditText
             android:id="@+id/primeFactorBox2"
@@ -85,7 +85,7 @@
             android:inputType="number"
             android:gravity="center"
             android:ems="2"
-            android:textSize="26dp" >
+            android:textSize="50dp" >
         </EditText>
         
 		 <Button
@@ -116,7 +116,7 @@
         android:layout_below="@+id/primeProblem"
         android:layout_centerHorizontal="true"
         android:text="Well done."
-        android:textSize="26dp" />
+        android:textSize="50dp" />
 
     <Button
         android:id="@+id/primePrev"

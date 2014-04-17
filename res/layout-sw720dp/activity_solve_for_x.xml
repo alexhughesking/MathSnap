@@ -16,17 +16,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="50dp" />
 
-                
-        <TextView
-        android:id="@+id/solveXDummyCenter"
-        android:layout_width="0px"
-        android:layout_height="0px"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="" />
-                 
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/solveXEqn"
@@ -34,7 +25,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/solveXDummyCenter" >
+        android:layout_centerVertical="true" >
     </LinearLayout>
 
     <Button
@@ -105,7 +96,7 @@
         android:layout_centerHorizontal="true"
         android:text="Select a term to begin."
         android:textColor="#000"
-        android:textSize="20dp" />
+        android:textSize="50dp" />
 
     <Button
         android:id="@+id/solveXUndoButton"
@@ -118,21 +109,23 @@
         android:onClick="undo" />
 
     <Button
-        android:id="@+id/solveXNextProb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/solveXMultiplyButton"
-        android:layout_alignParentRight="true"
-        android:onClick="nextProb"
-        android:text="Next" />
-
-    <Button
         android:id="@+id/solveXPrevProb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/solveXDistributeButton"
+        android:layout_alignBaseline="@+id/solveXCombineButton"
+        android:layout_alignBottom="@+id/solveXCombineButton"
         android:layout_alignParentLeft="true"
-        android:onClick="prevProb"
-        android:text="Prev" />
+        android:text="Previous"
+        android:onClick="prevProb" />
+
+    <Button
+        android:id="@+id/solveXNextProb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/solveXCombineButton"
+        android:layout_alignBottom="@+id/solveXCombineButton"
+        android:layout_alignParentRight="true"
+        android:text="    Next    "
+        android:onClick="nextProb" />
 
 </RelativeLayout>
