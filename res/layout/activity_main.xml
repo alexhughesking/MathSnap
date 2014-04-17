@@ -19,7 +19,7 @@
                 android:id="@+id/clearProgImageL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/lb" 
+                android:src="@drawable/prime" 
                 android:padding="0dip"/>
 
             <TextView
@@ -36,7 +36,7 @@
                 android:id="@+id/primeProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/lb" />
+                android:src="@drawable/progress0" />
             
 		</TableRow>
         <TableRow 
@@ -130,39 +130,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/progress0" />
             
-		</TableRow>
-		
-        <TableRow 
-            android:id="@+id/clearProgRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dip" >
-            
-            <ImageView
-                android:id="@+id/clearProgImageL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/lb" 
-                android:padding="0dip"/>
-
-            <TextView
-                android:id="@+id/clearProg"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="Clear All Progress" 
-                android:gravity="center"
-                android:background="#FF6B6B"
-                android:clickable="true"
-                android:onClick="clearProgress"/>
-
-            <ImageView
-                android:id="@+id/clearProgImageR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/lb" />
-            
-		</TableRow>
-		
+		</TableRow>	
+        
         <TableRow 
             android:id="@+id/graphRow"
             android:layout_width="wrap_content"
@@ -173,14 +142,14 @@
                 android:id="@+id/graphImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/lb" 
+                android:src="@drawable/graph" 
                 />
 
             <TextView
                 android:id="@+id/mainGraph"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text="Graph Testing" 
+                android:text="Graphing" 
                 android:gravity="center"
                 android:background="#FF6B6B"
                 android:clickable="true"
@@ -193,6 +162,39 @@
                 android:src="@drawable/progress0" />
  
         </TableRow>
+		
+        <TableRow 
+            android:id="@+id/clearProgRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip" >
+            
+            <ImageView
+                android:id="@+id/clearProgImageL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/warning" 
+                android:padding="0dip"/>
+
+            <TextView
+                android:id="@+id/clearProg"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:text="Clear All Progress" 
+                android:gravity="center"
+                android:background="#C7F464"
+                android:clickable="true"
+                android:onClick="clearProgress"/>
+
+            <ImageView
+                android:id="@+id/clearProgImageR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/warning" />
+            
+		</TableRow>
+		
+
     </TableLayout>
 </ScrollView>
 
